@@ -92,7 +92,7 @@
 					<img id="header_img" src="<?=$session->config['image_header']['value']?>" />
 					<div class="audio-introduction">
 						<!-- Player -->
-						<audio id="audio1" src="mp3/Facebook_Ansage_Bibi.wav" controls preload="auto" type="audio/mpeg"  autobuffer></audio>
+						<audio id="audio1" src="mp3/Facebook_Ansage_Bibi.wav" controls preload="auto"  autobuffer></audio>
 					</div>
 				</div>
 			</div>
@@ -151,7 +151,7 @@
 							echo "<tr>";
 					?>
 						<td><img src="https://graph.facebook.com/<?php echo $row['fb_user_id']; ?>/picture" alt="<?php echo $row['fb_user_name']; ?>" title="<?php echo $row['fb_user_name']; ?>"></td>
-						<td><audio id="audio1" src="<?=$row['sound_url']?>" controls preload="auto" autobuffer></audio></td>
+						<td><audio src="<?=$row['sound_url']?>" controls preload="auto" type="audio/mpeg" autobuffer></audio></td>
 					<?php 
 						if ( $i % 2 == 1)
 							echo "</tr>";
