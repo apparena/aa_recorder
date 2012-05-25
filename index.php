@@ -92,7 +92,7 @@
 					<img id="header_img" src="<?=$session->config['image_header']['value']?>" />
 					<div class="audio-introduction">
 						<!-- Player -->
-						<audio id="audio1" src="mp3/Facebook_Ansage_Bibi.wav" controls preload="auto" autobuffer></audio>
+						<audio id="audio1" src="mp3/Facebook_Ansage_Bibi.wav" controls preload="auto" type="audio/mpeg"  autobuffer></audio>
 					</div>
 				</div>
 			</div>
