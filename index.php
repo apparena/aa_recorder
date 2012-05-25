@@ -84,118 +84,87 @@
 	</div>
 	
 	<div id="main" class="container">
-		<?php if ($session->fb['is_fan'] == true || $session->config['check_nofan']['value'] == 'o'): ?>
+	
+		<?php if ($session->fb['is_fan'] == true || 
+					!$session->config['fangate_activated']['value']){ ?>
 			<div id="header">
 				<div class="thumbnail" style="position:relative">	
 					<img id="header_img" src="<?=$session->config['image_header']['value']?>" />
-				<div style="position:absolute; top: 263px;left: 70px;">
-				<!-- Player -->
-			<audio id="audio1" src="mp3/Facebook_Ansage_Bibi.wav" controls preload="auto" autobuffer></audio>
-				</div>
+					<div class="audio-introduction">
+						<!-- Player -->
+						<audio id="audio1" src="mp3/Facebook_Ansage_Bibi.wav" controls preload="auto" autobuffer></audio>
+					</div>
 				</div>
 			</div>
-			<br>
-		<div id="savesounds" class="alert alert-success span9" style="visibility:hidden">
-		  Aufnahme gespeichert
+			<div id="savesounds" class="alert alert-success span9">
+				<?php __p("Recording saved"); ?>
 			</div>
 			<!-- Recorder -->
 			<div class="row show-grid">
-			<div class="span2" style="background-color: #eeeeee;border:1px solid #cccccc">
-			Zeit: <span id="time">00:00</span>
+				<div class="span2" style="background-color: #eeeeee;border:1px solid #cccccc">
+					<?php __p("Time"); ?>: <span id="time">00:00</span>
+				</div>
+				<div class="span4" style="background-color: #eeeeee;border:1px solid #cccccc">
+					<?php __p("Status"); ?>: <span id="status"></span>
+				</div>
+				<div class="span6" id="levelbase" >
+					<div id="levelbar"></div>  
+				</div>
 			</div>
-			<div class="span4" style="background-color: #eeeeee;border:1px solid #cccccc">
-			Status: <span id="status"></span>
-			</div>
-		<div class="span6" id="levelbase" style="width:200px;height:20px;background-color:#ffff00">
-		  <div id="levelbar" style="height: 19px; background-color: red; width: 2px; "></div>  
-		</div></div>
-		<br>
 
-		<?php if(app_has_recorded($aa_inst_id,$fb_user_id) == false): ?>
-			<div class="row show-grid">
-				<div class="span2" ><a class="btn btn-danger" id="record" value="Record"><i class="icon-volume-up icon-white"></i> Aufnahme</a></div>
-				<div class="span2"><a class="btn" id="stop" value="Stop"><i class="icon-stop icon-black"></i> Stop</a></div>
-				<div class="span2" id="img_tag"><a class="btn" id="send" value="Send Data"><i class="icon-upload icon-black"></i> Datei hochladen</a></div>
-		   </div>
-		   <?php else: ?>
-		   <div class="alert alert-success span9">
-		   <?php __p('You already record a message'); ?>
-		   <!--
-		   Aufnahmen
-		   -->
-		   </div>
-		   <?php endif; ?>
-
-
-			  </div>
-			  <br>
-
-
-		<h4>Uploads </h4>
-		<?php $rows=app_record_list($aa_inst_id); ?>
-		<?php if(count($rows) == 0): ?>
-		   <div class="alert alert-block span9">
-
-			  <?php __p('Be The First To Record Sound'); ?>
-		   </div>
-
-		<?php else: ?>
-
-		 <table class="table table-striped">
-		<?php foreach($rows as $row): ?>
-		   <tr>
-			<td>
-			<?php echo $row['fb_user_name']; ?>
-			</td>
-			<td>
-			<?php echo $row['sound_url']; ?>
-			</td>
-		   </tr>
-		   <?php endforeach; ?>
-		 </table>
-
-		<?php endif; ?>
-		   
-		   <!-- Records -->
-		   
-		   <? 	
-		   $connection = mysql_connect( $database_host, $database_user, $database_pass );
-			
-			if ( !$connection ) {
-			
-				die( 'sql connection failed: ' . mysql_error() );
-				 
-			}
-		   $db = mysql_select_db( $database_name, $connection );
-		   $checkSql = "SELECT `fb_user_id` FROM `tags` WHERE `aa_inst_id` = " . $session->instance['aa_inst_id']  . " AND `sound_url` = 1";
-		   $result = mysql_query($checkSql);
-		   $i=0;
-		   while($row=mysql_fetch_array($result)){
-		  $i++;
-		  $array[$i] = $row[0];
-		}
-		if ($array=true) {
-		$number = count($array);
-		for ($i = 1; $i <= $number; $i++) { 
-		if (file_exists("/var/www/uploads/apps/instance/" . $session->instance['aa_inst_id'] . "/user_upload" . $array[$i] . ".wav")) {
-		?>
-		<div class="row">
-				<div class="span1"><img src="https://graph.facebook.com/<?= $array[$i] ?>/picture"></div>
-				<div class="span6">	<audio id="audio1" src="/var/www/uploads/apps/instance/"<?=$session->instance['aa_inst_id']?>"/user_upload"<?=$array[$i]?>".wav" controls preload="auto" autobuffer></audio></div>
-		</div>    	
-		<? } } } ?>
-
-
-			
+			<?php if(app_has_recorded($session->instance['aa_inst_id'],$session->fb['fb_user_id']) == false): ?>
+				<div class="row show-grid">
+					<div class="span2" >
+						<a class="btn btn-danger" id="record" value="Record">
+							<i class="icon-volume-up icon-white"></i> <?php __p("Record"); ?>
+						</a>
+					</div>
+					<div class="span2">
+						<a class="btn" id="stop" value="Stop">
+							<i class="icon-stop icon-black"></i> <?php __p("Stop"); ?>
+						</a>
+					</div>
+					<div class="span2" id="img_tag">
+						<a class="btn" id="send" value="Send Data">
+							<i class="icon-upload icon-black"></i> <?php __p("Save"); ?>
+						</a>
+					</div>
+				</div>
+			<?php else: ?>
+				<div class="alert alert-success span9">
+					<?php __p('You already record a message'); ?>
+				</div>
 			<?php endif; ?>
-		
-		
+
+			<h4><?php __p('Recordings'); ?></h4>
+			<?php $rows=app_record_list($aa_inst_id); ?>
+			<?php if(count($rows) == 0): ?>
+				<div class="alert alert-block span9">
+				  <?php __p('Be the first to record something'); ?>
+				</div>
+			<?php else: ?>
+				<table class="table table-striped">
+					<?php 
+					$i = 0;
+					foreach($rows as $row){
+						if ( $i % 2 == 0)
+							echo "<tr>";
+					?>
+						<td><img src="https://graph.facebook.com/<?php echo $row['fb_user_id']; ?>/picture" alt="<?php echo $row['fb_user_name']; ?>" title="<?php echo $row['fb_user_name']; ?>"></td>
+						<td><audio id="audio1" src="<?=$row['sound_url']?>" controls preload="auto" autobuffer></audio></td>
+					<?php 
+						if ( $i % 2 == 1)
+							echo "</tr>";
+						$i++;
+					} ?>
+				</table>
+			<?php endif; ?>
+		<?php } ?>
 	</div> <!-- #main -->
 	
 	<div class="custom-footer">
-		<?php //echo $session->config['custom_footer']['value']; ?>
+		<?php echo $session->config['custom_footer']['value']; ?>
 	</div>
-	
 	 	
  	<?php // include the file for the loading screen
  	require_once( dirname(__FILE__).'/templates/loading_screen.phtml' );
@@ -267,37 +236,11 @@
 			fb_app_id     = '<?=$session->instance["fb_app_id"]?>';
 			fb_canvas_url = '<?=$session->instance["fb_canvas_url"]?>';
 			aa_inst_id    = '<?=$session->instance["aa_inst_id"]?>';		
-			tag_image = '<?=$session->config["image_tagger"]["value"]?>';
-			showFaces = '<?=$session->config["show_faces"]["value"]?>';
-			
-			xCoord = 0;
-			yCoord = 0;
-			
-			$("#img_tag").click( function(e){
-				heightOff = $("#header_img").height();
-				
-//$("#_debug").html("offset height: " + heightOff);
-
-				// get the mouse-coords where the user clicked the image
-				xCoord = ( e.pageX - this.offsetLeft );
-				yCoord = ( e.pageY - heightOff );
-				
-				authUser( xCoord, yCoord );
-				
-				document.getElementById("flashrecarea").style.top = "630px";
-
-				
-			});
-			
-			
 		});
 	
 		window.fbAsyncInit = function() {
-		
 			if( typeof( fb_app_id ) == "undefined" ) {
-				
-				fb_app_id = '<?=$session->instance["fb_app_id"]?>';
-				
+				fb_app_id = '<?=$session->instance["fb_app_id"]?>';				
 			}
 		
 			FB.init({
@@ -350,24 +293,15 @@
 			ref.parentNode.insertBefore(js, ref);
 		}(document));
 	
-	 $.jRecorder(
-     
-     { 
-        //host : 'https://app-arena.com/kunden/kiddinx/recorder/acceptfile.php?filename=test.wav' ,  //replace with your server path please
-        //host : 'acceptfile.php?filename=123'+ fb_user_id,  //replace with your server path please
-        host : 'acceptfile.php?filename='+ fb_user_id+'_<?php echo $session->instance['aa_inst_id']; ?>',  //replace with your server path please
-        
+	 $.jRecorder({ 
+         host : 'acceptfile.php?filename='+ fb_user_id+'_<?php echo $session->instance['aa_inst_id']; ?>',  //replace with your server path please       
         callback_started_recording:     function(){callback_started(); },
         callback_stopped_recording:     function(){callback_stopped(); },
         callback_activityLevel:          function(level){callback_activityLevel(level); },
         callback_activityTime:     function(time){callback_activityTime(time); },
         callback_finished_sending:     function(time){ callback_finished_sending() },
-        
-        
         swf_path : 'jRecorder.swf',
-     
-     }
-   );
+    });
 
 	</script>
 	
@@ -380,64 +314,55 @@
 </html>
 
  <script type="text/javascript">
+	$('#record').click(function(){
+	  $.jRecorder.record(30);
+	  document.getElementById('stop').innerHTML = 'Stop';
 
-                  $('#record').click(function(){
-                      $.jRecorder.record(30);
-                      document.getElementById('stop').innerHTML = 'Stop';
+	});
+	$('#stop').click(function(){
+	 $.jRecorder.stop();
+	 document.getElementById('stop').innerHTML = 'Abspielen';
+	 document.getElementById('record').innerHTML = 'Neu aufnehmen';
 
-                  })
-            
-                  $('#stop').click(function(){
-                     $.jRecorder.stop();
-                     document.getElementById('stop').innerHTML = 'Abspielen';
-                     document.getElementById('record').innerHTML = 'Neu aufnehmen';
-
-                  })
-                  
-                  $('#send').click(function(){
-                     //$.jRecorder.sendData();
-
-		     save_tag_callback=function()
-		     {
-		     $.jRecorder.sendData();
-		     }
-           
-                  })    
+	});
+	$('#send').click(function(){
+		save_tag_callback=function(){
+			$.jRecorder.sendData();
+		}
+    }) ;   
     //function callback
-   				 function callback_activityTime(time){
-      			$('#time').html(time);  
-    			 }
-                  function callback_finished(){
-                           $('#status').html('Aufnahme ist fertig');
-                  }
-                  
-                  function callback_started(){
-                      $('#status').html('Aufnahme gestartet');
-                  }
-                  function callback_error(code){
-                      $('#status').html('Error, code:' + code);
-                  }
-                  function callback_stopped(){
-                      $('#status').html('Aufnahme gestoppt');
-                  }
-                  function callback_finished_recording(){             
-                      $('#status').html('Aufnahme beendet');
-                  }
-                  function callback_finished_sending(){
-                      $('#status').html('Aufnahme gespeichert');
-                      document.getElementById('savesounds').style.visibility = 'visible'; 
-                  }
-                  function callback_activityLevel(level){
-                    $('#level').html(level);
-                    if(level == -1)
-                    {s
-                      $('#levelbar').css("width",  "2px");
-                    }
-                    else
-                    {
-                      $('#levelbar').css("width", (level * 2)+ "px");
-                    }
-                  }
+	function callback_activityTime(time){
+		$('#time').html(time);  
+	}
+	function callback_finished(){
+		$('#status').html('Aufnahme ist fertig');
+	}
+
+	function callback_started(){
+		$('#status').html('Aufnahme gestartet');
+	}
+	function callback_error(code){
+		$('#status').html('Error, code:' + code);
+	}
+	function callback_stopped(){
+		$('#status').html('Aufnahme gestoppt');
+	}
+	function callback_finished_recording(){             
+		$('#status').html('Aufnahme beendet');
+	}
+	function callback_finished_sending(){
+		$('#status').html('Aufnahme gespeichert');
+		document.getElementById('savesounds').style.visibility = 'visible'; 
+	}
+	function callback_activityLevel(level){
+		$('#level').html(level);
+		if(level == -1){
+		  $('#levelbar').css("width",  "2px");
+		}
+		else {
+		  $('#levelbar').css("width", (level * 2)+ "px");
+		}
+	}
       
  </script>
 		
