@@ -69,7 +69,14 @@
     </div>-->
 	
 	<!-- this is the div you can append info/alert/error messages to -->
-	<div id="msg-container"></div> 
+	<div id="msg-container">
+	<?php if(app_has_recorded($session->instance['aa_inst_id'],$session->fb['fb_user_id']) == true): ?>
+	<div class="alert alert-success span9">
+	<?php __p('You already record a message'); ?>
+	</div>
+	<?php endif; ?>
+
+	</div> 
 	
 	<div class="custom-header">
 		<?php echo $session->config['custom_header']['value']; ?>
@@ -123,9 +130,11 @@
 					</div>
 				</div>
 			<?php else: ?>
+			<!--
 				<div class="alert alert-success span9">
-					<?php __p('You already record a message'); ?>
+					<?php //__p('You already record a message'); ?>
 				</div>
+				-->
 			<?php endif; ?>
 
 			<h4><?php __p('Recordings'); ?></h4>
