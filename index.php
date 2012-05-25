@@ -30,9 +30,9 @@
 	<meta name="viewport" content="width=device-width">
 	
 	<!-- Include bootstrap css files -->
-	<link rel="stylesheet" type="text/css" href="css/styles.css" />
 	<style type="text/css">
 		<?=$session->config['css_bootstrap']['value'];?>
+		<?=$session->config['css']['value'];?>
 	</style>
 
 	<script src="js/libs/modernizr-2.5.2-respond-1.1.0.min.js"></script>
@@ -80,7 +80,7 @@
 		<?php if ($session->fb['is_fan'] == true || 
 					!$session->config['fangate_activated']['value']){ ?>
 			<div id="header">
-				<div class="thumbnail" style="position:relative">	
+				<div class="thumbnail">	
 					<img id="header_img" src="<?=$session->config['image_header']['value']?>" />
 					<div class="audio-introduction">
 						<!-- Player -->
@@ -93,10 +93,10 @@
 			</div>
 			<!-- Recorder -->
 			<div class="row show-grid">
-				<div class="span2" style="background-color: #eeeeee;border:1px solid #cccccc">
+				<div class="span2">
 					<?php __p("Time"); ?>: <span id="time">00:00</span>
 				</div>
-				<div class="span4" style="background-color: #eeeeee;border:1px solid #cccccc">
+				<div class="span4">
 					<?php __p("Status"); ?>: <span id="status"></span>
 				</div>
 				<div class="span6" id="levelbase" >
