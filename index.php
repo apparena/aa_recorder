@@ -45,7 +45,7 @@
 	<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
 	
 	<?php // Here you can integrate your fangate
-	if ($session->fb['is_fan'] == false && $session->config['check_nofan']['value'] == '1') { ?>
+	if ($session->fb['is_fan'] == false && $session->config['fangate_activated']['value']) { ?>
 		<div class="page_non_fans_layer"> 
 			<div class="img_non_fans">
 				<img src="<?php echo $session->config['page_welcome_nonfans']['value']?>" />
@@ -53,15 +53,7 @@
 			</div>
 			<div id="non_fan_background">&nbsp;</div>
 		</div>
-		
-	<?php 
-//	exit(0);
-	} else {
-		
-		//include "templates/.phtml";
-		//include 'tagger.php';
-	
-	}?>
+	<?php } ?>
 	
     <!--<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
