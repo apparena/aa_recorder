@@ -295,17 +295,7 @@
         swf_path : 'jRecorder.swf',
     });
 
-	</script>
-	
-	<!-- Show admin panel if user is admin -->
-	<?php // Show admin panel, when page admin
-	if (is_admin()) {
-		//include_once 'admin/admin_panel.php';?>		
-	<?php } ?>
-</body>
-</html>
 
- <script type="text/javascript">
 	$('#record').click(function(){
 	  $.jRecorder.record(30);
 	  document.getElementById('stop').innerHTML = 'Stop';
@@ -357,4 +347,12 @@
 	}
       
  </script>
-		
+
+	
+	<!-- Show admin panel if user is admin -->
+	<?php // Show admin panel, when page admin
+	if (is_admin()) {
+		//include_once 'admin/admin_panel.php';?>		
+	<?php } ?>
+</body>
+</html>
