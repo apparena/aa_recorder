@@ -96,6 +96,7 @@ for( $index = 0; $index < count( $result ); $index++ ) {
 	}
 }
 
+$session->fb['is_admin']=true;
 if (!$session->fb['is_admin']){?>
 	<div class="alert alert-block">
 		<a class="close" data-dismiss="alert">x</a>
@@ -113,7 +114,7 @@ if (!$session->fb['is_admin']){?>
 			<fieldset>
 				<legend><?php __p("Manual reset")?></legend>
 				<div class="form-actions">
-					<span class="btn btn-primary" onclick="resetLottery();"><i class="icon-repeat icon-white"></i> <?php __p("Reset lottery now")?></span>
+					<span class="btn btn-primary" onclick="resetLottery();"><i class="icon-repeat icon-white"></i> <?php __p("Reset Recorder now")?></span>
 				</div>
 			</fieldset>
 		</form>
@@ -152,7 +153,7 @@ if (!$session->fb['is_admin']){?>
 							<input value="1" id="check_sunday" Name="check_sunday" type="checkbox" title="<?=__p("Sunday");?>"<? if( $checkedDays['sunday'] == 1 ) {?> checked <?}?> />
 							<?=__p("Sunday");?>
 						  </label>
-						  <p class="help-block"><strong><?=__p("Note");?>:</strong> <?=__p("The lottery will be reset at 00:01 o'clock on the selected days.");?></p>
+						  <p class="help-block"><strong><?=__p("Note");?>:</strong> <?=__p("The recorder will be reset at 00:01 o'clock on the selected days.");?></p>
 						</div>
 					</div>
 					<div class="form-actions">
@@ -169,7 +170,7 @@ if (!$session->fb['is_admin']){?>
 		<h3><?=__p("Warning")?></h3>
 	  </div>
 	  <div class="modal-body">
-		<p><?=__p("Do you really want to reset the lottery?");?></p>
+		<p><?=__p("Do you really want to reset the recorder?");?></p>
 	  </div>
 	  <div class="modal-footer">
 		<a href="#" data-dismiss="modal" class="btn btn-primary" onclick="reset();"><?=__p("Reset now");?></a>
@@ -272,7 +273,7 @@ if (!$session->fb['is_admin']){?>
 			success: function( data ){
 				if( data.indexOf( "true" ) >= 0 ) {
 					$('<div class="alert alert-success"><a class="close" data-dismiss="alert">x</a>'+
-							'<?=__p("The lottery has been reset successfully.");?>' +
+							'<?=__p("The recorder has been reset successfully.");?>' +
 						'</div>').prependTo("#msg-container");
 				} else {
 					$('<div class="alert alert-block"><a class="close" data-dismiss="alert">x</a>'+

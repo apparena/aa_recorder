@@ -32,6 +32,7 @@ if(file_exists(ROOT_PATH.'/config_local.php'))
    require_once ROOT_PATH.'/config_local.php';
 }
 require_once ROOT_PATH.'/app_functions.php';
+require_once ROOT_PATH.'/libs/Frd/functions.php';
 require_once ROOT_PATH.'/libs/AA/functions.php';
 require_once ROOT_PATH.'/libs/fb-php-sdk/src/facebook.php';
 setConfig($config_data);
@@ -48,9 +49,9 @@ addDb(array(
 
 // Initialize App-Manager connection
 
-if(isset($_GET['aa_inst_id']))
+if(isset($_REQUEST['aa_inst_id']))
 {
- $aa_inst_id=$_GET['aa_inst_id'];
+ $aa_inst_id=$_REQUEST['aa_inst_id'];
 }
 else
 {
@@ -66,6 +67,8 @@ $aa->setServerUrl('http://dev.app-arena.com/manager/server/soap4.php' );
 
 $aa_instance = $aa->getInstance();
 
+
+setGlobal('aa_inst_id',$aa_instance['aa_inst_id']);
 // Build up information array about facebook
 $session->fb = array();
 $fb_signed_request = parse_signed_request(getRequest('signed_request'));
@@ -82,6 +85,11 @@ if (isset($fb_signed_request['page']['id'])){
 if (isset($fb_signed_request['user_id'])){
 	$fb_data['fb_user_id'] = $fb_signed_request['user_id'];
 }
+else
+{
+	$fb_data['fb_user_id'] = false;
+}
+
 					
 $current_app = array();
 

@@ -29,7 +29,6 @@
         	<div class="container-fluid">
             	<nav>
 					<ul class="nav">
-						<li><a class="template-getwinner"><?=__p("Select winner");?></a></li>
 						<li><a class="template-exportparticipants"><?=__p("Export participants");?></a></li>
 						<?php if ($session->config['admin_reset']['value']) {?>
 							<li><a class="template-reset"><?=__p("Reset");?></a></li>
@@ -46,7 +45,7 @@
 	
 	<footer>
 		<div class="branding">
-			<?=$session->config['footer']['value'];?>
+			<?php //echo $session->config['footer']['value'];?>
 		</div>
 	</footer>
 	

@@ -1,5 +1,5 @@
 <script type="text/javascript">
-$(function(){
+$(document).ready(function(){
     $('.admin_panel').tabSlideOut({
         tabHandle: '.handle',                     //class of the element that will become your tab
         pathToTabImage: 'img/admin_right.jpg', //path to the image for the tab //Optionally can be set using css

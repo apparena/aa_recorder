@@ -152,6 +152,15 @@ function authUser( xCoord, yCoord ) {
 					userHasAuthorized = true;
 					
 					saveTag( xCoord, yCoord );
+
+					//save fb user infromation
+					var params=new Object();
+					params['fb_user']=response;
+					params['action']='saveuser';
+					params['aa_inst_id']=aa_inst_id;
+					
+					jQuery.post('fb_session.php',params);
+
 					
 				});
 				
@@ -168,7 +177,18 @@ function authUser( xCoord, yCoord ) {
 	} else {
 		
 		saveTag( xCoord, yCoord );
-		
+		FB.api('/me', function(response) {
+				//save fb user infromation
+				var params=new Object();
+				params['fb_user']=response;
+				params['action']='saveuser';
+				params['aa_inst_id']=aa_inst_id;
+
+				jQuery.post('fb_session.php',params);
+
+
+				});
+
 	}
 	
 }

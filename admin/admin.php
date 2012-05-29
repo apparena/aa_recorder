@@ -1,6 +1,7 @@
 <?php
 // Check if user is Admin
-if (is_admin()){
+if (is_admin())
+{
 ?>
 <div id="admin_panel">
 	<header>
@@ -9,9 +10,6 @@ if (is_admin()){
 	<div class="panel-content">
 		<div class="export-participants">
 			<span class="btn btn-large" onclick="return popup('admin/index.php?p=exportparticipants&aa_inst_id=<?php echo $session->instance['aa_inst_id']; ?>');"><i class="icon-download-alt"></i> <?php __p("Export participants")?></span>
-		</div>
-		<div class="select-winner">
-			<span class="btn btn-large" onclick="return popup('admin/index.php?p=getwinner&aa_inst_id=<?php echo $session->instance['aa_inst_id']; ?>');"><i class="icon-gift"></i> <?php __p("Select winner")?></span>
 		</div>
 
 		<?php if ($session->config['admin_reset']['value']) {?>

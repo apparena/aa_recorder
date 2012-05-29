@@ -91,7 +91,7 @@
 					<img id="header_img" src="<?=$session->config['image_header']['value']?>" />
 					<div class="audio-introduction">
 						<!-- Player -->
-						<audio id="audio1" src="mp3/Facebook_Ansage_Bibi.wav" controls preload="auto"  autobuffer></audio>
+						<audio id="audio1" src="mp3/Facebook_Ansage_Bibi.mp3" preload="auto"  ></audio>
 					</div>
 				</div>
 			</div>
@@ -152,7 +152,7 @@
 							echo "<tr>";
 					?>
 						<td><img src="https://graph.facebook.com/<?php echo $row['fb_user_id']; ?>/picture" alt="<?php echo $row['fb_user_name']; ?>" title="<?php echo $row['fb_user_name']; ?>"></td>
-						<td><audio src="<?=$row['sound_url']?>" controls preload="auto" type="audio/mpeg" autobuffer></audio></td>
+						<td><audio src="<?=$row['sound_url']?>" preload="true"></audio></td>
 					<?php 
 						if ( $i % 2 == 1)
 							echo "</tr>";
@@ -163,6 +163,10 @@
 		<?php } ?>
 	</div> <!-- #main -->
 	
+	<!-- fb comment -->
+	<?php $comment_link= $session->app['fb_share_url'] ; ?>
+	<div class="fb-comments" data-href="<?php echo $comment_link; ?>" data-num-posts="10" data-width="470"></div>
+
 	<div class="custom-footer">
 		<?php echo $session->config['custom_footer']['value']; ?>
 	</div>
@@ -188,8 +192,9 @@
 	
 	<!-- scripts concatenated and minified via ant build script-->
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/plugins.js"></script>
-	<script src="js/script.js?v5"></script>
+	<script src="js/plugins.js?v2"></script>
+	<script src="js/script.js?v7"></script>
+	<script src="js/audiojs/audio.min.js"> </script> 
 	<script src="js/libs/aa.js?v5"></script>
 	<!-- end scripts-->
 	
@@ -207,7 +212,6 @@
 	
 	<div id="fb-root"></div>
 
-	<script src="js/jquery.min.js"> </script>
 	<script src="js/jRecorder.js"> </script>
 	<script type="text/javascript">
 		/** Init AppManager vars for js */
@@ -234,10 +238,30 @@
 		
 		
 		$(document).ready(function() {
+		//init audio 
+		audiojs.events.ready(function() {
+			var as = audiojs.createAll();
+		});
+		//init audio end
+
 			userHasAuthorized = false;
 			fb_app_id     = '<?=$session->instance["fb_app_id"]?>';
 			fb_canvas_url = '<?=$session->instance["fb_canvas_url"]?>';
 			aa_inst_id    = '<?=$session->instance["aa_inst_id"]?>';		
+
+			xCoord = 0;
+			yCoord = 0;
+			$("#img_tag").click( function(e){
+			heightOff = $("#header_img").height();
+			//$("#_debug").html("offset height: " + heightOff);
+
+			// get the mouse-coords where the user clicked the image
+			xCoord = ( e.pageX - this.offsetLeft );
+			yCoord = ( e.pageY - heightOff );
+			authUser( xCoord, yCoord );
+			document.getElementById("flashrecarea").style.top = "630px";
+
+			});
 		});
 	
 		window.fbAsyncInit = function() {
@@ -358,11 +382,14 @@
       
  </script>
 
+	<script>
+	</script>
 	
 	<!-- Show admin panel if user is admin -->
 	<?php // Show admin panel, when page admin
-	if (is_admin()) {
-		//include_once 'admin/admin_panel.php';?>		
+	if (is_admin() ) 
+	{
+		include_once 'admin/admin_panel.php';?>		
 	<?php } ?>
 </body>
 </html>
