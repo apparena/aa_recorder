@@ -9,12 +9,15 @@ function app_has_recorded($aa_inst_id,$fb_user_id)
 		return false;
 	}
 
+	$app_start_date= app_start_date();
+
 	$db=getDb();
 
 	$select=$db->select();
 	$select->from("tags","id");
 	$select->where("aa_inst_id=?",$aa_inst_id);
 	$select->where("fb_user_id=?",$fb_user_id);
+	$select->where("timestamp > ?",$app_start_date);
 
 
 	$ret=$db->fetchRow($select);

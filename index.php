@@ -95,9 +95,13 @@
 					</div>
 				</div>
 			</div>
+
+			<?php if(app_has_recorded($session->instance['aa_inst_id'],$session->fb['fb_user_id']) == false): ?>
+			<!--
 			<div id="savesounds" class="alert alert-success span9">
 				<?php __p("Recording saved"); ?>
 			</div>
+			-->
 			<!-- Recorder -->
 			<div class="row show-grid">
 				<div class="span2">
@@ -111,7 +115,6 @@
 				</div>
 			</div>
 
-			<?php if(app_has_recorded($session->instance['aa_inst_id'],$session->fb['fb_user_id']) == false): ?>
 				<div class="row show-grid">
 					<div class="span2" >
 						<a class="btn btn-danger" id="record" value="Record">
@@ -194,7 +197,7 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/plugins.js?v2"></script>
 	<script src="js/script.js?v7"></script>
-	<script src="js/audiojs/audio.min.js"> </script> 
+	<script src="js/audiojs/audio.min.js?v3"> </script> 
 	<script src="js/libs/aa.js?v5"></script>
 	<!-- end scripts-->
 	
