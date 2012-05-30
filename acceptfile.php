@@ -7,8 +7,8 @@
 
 $filename=$_REQUEST['filename'];
 
-list($filename,$aa_inst_id)=explode("_",$filename);
-$filename.="_".time();
+list($fb_user_id,$aa_inst_id)=explode("_",$filename);
+$filename=$fb_user_id."_".time();
 
 if(!isset($_GET['aa_inst_id']))
 {
@@ -25,7 +25,6 @@ include_once( "init.php" );
    $upload_path ='/var/www/uploads/apps/instance/' . $session->instance['aa_inst_id'] . '/user_upload/';
 
    
-   $fb_user_id = $filename;
    
    $fp = fopen($upload_path."/".$filename.".wav", "wb");
 
