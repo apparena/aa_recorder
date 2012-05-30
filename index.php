@@ -102,30 +102,30 @@
 
 			<?php if(app_has_recorded($session->instance['aa_inst_id'],$session->fb['fb_user_id']) == false): ?>
 				<!-- Recorder -->
-				<div class="row show-grid">
-					<div class="span2">
+				<div class="row show-grid player-status-bar">
+					<div class="span2 time-container">
 						<?php __p("Time"); ?>: <span id="time">00:00</span>
 					</div>
-					<div class="span4">
+					<div class="span4 status-container">
 						<?php __p("Status"); ?>: <span id="status"></span>
 					</div>
-					<div class="span4" id="levelbase" >
+					<div class="span4 level-container" id="levelbase" >
 						<div id="levelbar"></div>  
 					</div>
 				</div>
 
-				<div class="row show-grid">
-					<div class="span2" >
+				<div class="row show-grid player-control">
+					<div class="span2 record-container" >
 						<a class="btn btn-danger" id="record" value="Record">
 							<i class="icon-volume-up icon-white"></i> <?php __p("Record"); ?>
 						</a>
 					</div>
-					<div class="span2">
+					<div class="span2 stop-container">
 						<a class="btn" id="stop" value="Stop">
 							<i class="icon-stop icon-black"></i> <?php __p("Stop"); ?>
 						</a>
 					</div>
-					<div class="span2" id="img_tag">
+					<div class="span2 save-container" id="img_tag">
 						<a class="btn" id="send" value="Send Data">
 							<i class="icon-upload icon-black"></i> <?php __p("Save"); ?>
 						</a>
