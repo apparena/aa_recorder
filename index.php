@@ -330,7 +330,7 @@
 	 document.getElementById('record').innerHTML = 'Neu aufnehmen';
 
 	});
-  $('#send').click(function(){
+  $('#send').click(function(e){
      save_tag_callback=function(){
         $.jRecorder.sendData();
      }
