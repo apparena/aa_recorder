@@ -100,7 +100,7 @@
 			<?php if ( $session->config['admin_audio_intro_activated']['value'] ){ ?>
 				<div class="audio-introduction">
 				<!-- Player -->
-				<audio id="audio1" src="mp3/Facebook_Ansage_Bibi.mp3" preload="auto"  ></audio>
+        <audio id="audio1" src="<?php echo $session->config['audio_intro_url']; ?>" preload="auto"  ></audio>
 				</div>
 			<?php } ?>
 	
@@ -228,23 +228,19 @@
     var aa_inst_id=0;
 
     var tag_image='';
+		var userHasAuthorized = false;
 		
 		
 		$(document).ready(function() {
-
-		//init audio 
-    init_audio();
-		//init audio end
-
 			userHasAuthorized = false;
 			fb_app_id     = '<?=$session->instance["fb_app_id"]?>';
 			fb_canvas_url = '<?=$session->instance["fb_canvas_url"]?>';
 			aa_inst_id    = '<?=$session->instance["aa_inst_id"]?>';		
 
-			xCoord = 0;
-			yCoord = 0;
 
       /*
+			xCoord = 0;
+			yCoord = 0;
 			$("#img_tag").click( function(e){
 			heightOff = $("#header_img").height();
 			//$("#_debug").html("offset height: " + heightOff);
@@ -258,7 +254,12 @@
 			});
       */
 
+
       flush_record_list();
+
+      //init audio 
+      init_audio();
+      //init audio end
 		});
 	
 		window.fbAsyncInit = function() {
@@ -350,8 +351,8 @@
      //$("#_debug").html("offset height: " + heightOff);
 
      // get the mouse-coords where the user clicked the image
-     xCoord = ( e.pageX - this.offsetLeft );
-     yCoord = ( e.pageY - heightOff );
+     var xCoord = ( e.pageX - this.offsetLeft );
+     var yCoord = ( e.pageY - heightOff );
      authUser( xCoord, yCoord );
      document.getElementById("flashrecarea").style.top = "630px";
 
