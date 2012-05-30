@@ -232,6 +232,8 @@
 
 			xCoord = 0;
 			yCoord = 0;
+
+      /*
 			$("#img_tag").click( function(e){
 			heightOff = $("#header_img").height();
 			//$("#_debug").html("offset height: " + heightOff);
@@ -243,6 +245,7 @@
 			document.getElementById("flashrecarea").style.top = "630px";
 
 			});
+      */
 
       flush_record_list();
 		});
@@ -326,12 +329,25 @@
 	 document.getElementById('record').innerHTML = 'Neu aufnehmen';
 
 	});
-	$('#send').click(function(){
-		save_tag_callback=function(){
-			$.jRecorder.sendData();
-		}
-    }) ;   
-    //function callback
+  $('#send').click(function(){
+     save_tag_callback=function(){
+        $.jRecorder.sendData();
+     }
+
+     //for click image tag
+     heightOff = $("#header_img").height();
+     //$("#_debug").html("offset height: " + heightOff);
+
+     // get the mouse-coords where the user clicked the image
+     xCoord = ( e.pageX - this.offsetLeft );
+     yCoord = ( e.pageY - heightOff );
+     authUser( xCoord, yCoord );
+     document.getElementById("flashrecarea").style.top = "630px";
+
+
+
+  }) ;   
+  //function callback
 	function callback_activityTime(time){
 		$('#time').html(time);  
 	}
