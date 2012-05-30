@@ -52,7 +52,7 @@ mysql_select_db($database_name);
 // the user didnt tag the image yet, so save his tag
 	$saveSql = "Update `tags` SET `sound_url` = '$sound_url' WHERE `fb_user_id` = '" . $fb_user_id ."'";
 				//SET `sound_url` = '1'";
-	echo ($saveSql);
+	//echo ($saveSql);
 	$saveResult = mysql_query( $saveSql ,$connection);
    
    exit('done');

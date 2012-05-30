@@ -54,8 +54,9 @@
 	
 	$db = mysql_select_db( $database_name, $connection );
 	
+	$app_start_date= app_start_date();
 	// check if the user already has tagged the image
-	$checkSql = "SELECT * FROM `tags` WHERE `fb_user_id` = '" . $fb_user_id . "' AND `aa_inst_id` = " . $aa_inst_id;
+	$checkSql = "SELECT * FROM `tags` WHERE `fb_user_id` = '" . $fb_user_id . "' AND `aa_inst_id` = $aa_inst_id  and timestamp > '$app_start_date'";
 	
 	$checkResult = mysql_query( $checkSql );
 	
