@@ -231,7 +231,7 @@
 		var userHasAuthorized = false;
 		
 		
-		$(document).ready(function() {
+    jQuery(document).ready(function() {
 			userHasAuthorized = false;
 			fb_app_id     = '<?=$session->instance["fb_app_id"]?>';
 			fb_canvas_url = '<?=$session->instance["fb_canvas_url"]?>';
