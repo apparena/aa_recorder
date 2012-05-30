@@ -227,15 +227,15 @@ function saveTag( xCoord, yCoord ) {
 				
 				//var graph = '<img src="https://graph.facebook.com/' + fb_user_id + '/picture?type=square" />';
 				
-				if( showFaces == '1' ) {
+				//if( showFaces == '1' ) {
 				
 					$( "#image1" ).append( '<div id="tag_new"><img src="https://graph.facebook.com/' + fb_user_id + '/picture?type=square" class="fb-profile-img" /><img class="img-tag" src="' + tag_image + '" rel="tooltip" title="' + fb_user_name + '" /></div>' );
 				
-				} else {
+				//} else {
 				
-					$( "#image1" ).append( '<div id="tag_new"><img class="img-tag" src="' + tag_image + '" rel="tooltip" title="' + fb_user_name + '" /></div>' );
+				//	$( "#image1" ).append( '<div id="tag_new"><img class="img-tag" src="' + tag_image + '" rel="tooltip" title="' + fb_user_name + '" /></div>' );
 				
-				}
+				//}
 				
 				$( "#tag_new" ).attr( "style", "left: " + xCoord + "px; top: " + yCoord + "px; position: absolute;" );
 				
