@@ -87,19 +87,24 @@
 	</div>
 	
 	<div id="main" class="container">
-		<?php if ($session->fb['is_fan'] == true || !$session->config['fangate_activated']['value']){ ?>
+		<?php if ( $session->fb['is_fan'] == true || !$session->config['fangate_activated']['value'] ){ ?>
 			<div id="header" class="row">
 				<div class="span10">
 					<div class="thumbnail">	
 						<img id="header_img" src="<?=$session->config['image_header']['value']?>" />
-						<div class="audio-introduction">
-							<!-- Player -->
-							<audio id="audio1" src="mp3/Facebook_Ansage_Bibi.mp3" preload="auto"  ></audio>
-						</div>
+						
 					</div>
 				</div>
 			</div>
-
+			
+			<?php if ( $session->config['admin_audio_intro_activated']['value'] ){ ?>
+				<div class="audio-introduction">
+				<!-- Player -->
+				<audio id="audio1" src="mp3/Facebook_Ansage_Bibi.mp3" preload="auto"  ></audio>
+				</div>
+			<?php } ?>
+	
+	
 			<?php if(app_has_recorded($session->instance['aa_inst_id'],$session->fb['fb_user_id']) == false): ?>
 				<!-- Recorder -->
 				<div class="row show-grid player-status-bar">
