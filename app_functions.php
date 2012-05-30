@@ -94,8 +94,8 @@ function app_start_date()
 	$select=$db->select();
 
 	$select->from("app_config","config_value");
-	$select->where("aa_inst_id",getGlobal('aa_inst_id'));
-	$select->where("config_key",'round_reset_timestamp');
+	$select->where("aa_inst_id=?",getGlobal('aa_inst_id'));
+	$select->where("config_key=?",'round_reset_timestamp');
 
 	$start_date=$db->fetchOne($select);
 
