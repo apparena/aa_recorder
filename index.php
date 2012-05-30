@@ -79,91 +79,98 @@
 	</div> 
 	
 	<div class="custom-header">
-		<?php echo $session->config['custom_header']['value']; ?>
+		<div class="row">
+			<div class="span10">
+				<?php echo $session->config['custom_header']['value']; ?>
+			</div>
+		</div>
 	</div>
 	
 	<div id="main" class="container">
-	
-		<?php if ($session->fb['is_fan'] == true || 
-					!$session->config['fangate_activated']['value']){ ?>
-			<div id="header">
-				<div class="thumbnail">	
-					<img id="header_img" src="<?=$session->config['image_header']['value']?>" />
-					<div class="audio-introduction">
-						<!-- Player -->
-						<audio id="audio1" src="mp3/Facebook_Ansage_Bibi.mp3" preload="auto"  ></audio>
+		<div class="row">
+			<div class="span10">
+				<?php if ($session->fb['is_fan'] == true || 
+							!$session->config['fangate_activated']['value']){ ?>
+					<div id="header">
+						<div class="thumbnail">	
+							<img id="header_img" src="<?=$session->config['image_header']['value']?>" />
+							<div class="audio-introduction">
+								<!-- Player -->
+								<audio id="audio1" src="mp3/Facebook_Ansage_Bibi.mp3" preload="auto"  ></audio>
+							</div>
+						</div>
 					</div>
-				</div>
+		
+					<?php if(app_has_recorded($session->instance['aa_inst_id'],$session->fb['fb_user_id']) == false): ?>
+					<!--
+					<div id="savesounds" class="alert alert-success span9">
+						<?php __p("Recording saved"); ?>
+					</div>
+					-->
+					<!-- Recorder -->
+					<div class="row show-grid">
+						<div class="span2">
+							<?php __p("Time"); ?>: <span id="time">00:00</span>
+						</div>
+						<div class="span4">
+							<?php __p("Status"); ?>: <span id="status"></span>
+						</div>
+						<div class="span6" id="levelbase" >
+							<div id="levelbar"></div>  
+						</div>
+					</div>
+		
+						<div class="row show-grid">
+							<div class="span2" >
+								<a class="btn btn-danger" id="record" value="Record">
+									<i class="icon-volume-up icon-white"></i> <?php __p("Record"); ?>
+								</a>
+							</div>
+							<div class="span2">
+								<a class="btn" id="stop" value="Stop">
+									<i class="icon-stop icon-black"></i> <?php __p("Stop"); ?>
+								</a>
+							</div>
+							<div class="span2" id="img_tag">
+								<a class="btn" id="send" value="Send Data">
+									<i class="icon-upload icon-black"></i> <?php __p("Save"); ?>
+								</a>
+							</div>
+						</div>
+					<?php else: ?>
+					<!--
+						<div class="alert alert-success span9">
+							<?php //__p('You already record a message'); ?>
+						</div>
+						-->
+					<?php endif; ?>
+		
+					<h4><?php __p('Recordings'); ?></h4>
+					<?php $rows=app_record_list($aa_inst_id); ?>
+					<?php if(count($rows) == 0): ?>
+						<div class="alert alert-block span9">
+						  <?php __p('Be the first to record something'); ?>
+						</div>
+					<?php else: ?>
+						<table class="table table-striped">
+							<?php 
+							$i = 0;
+							foreach($rows as $row){
+								if ( $i % 2 == 0)
+									echo "<tr>";
+							?>
+								<td><img src="https://graph.facebook.com/<?php echo $row['fb_user_id']; ?>/picture" alt="<?php echo $row['fb_user_name']; ?>" title="<?php echo $row['fb_user_name']; ?>"></td>
+								<td><audio src="<?=$row['sound_url']?>" preload="true"></audio></td>
+							<?php 
+								if ( $i % 2 == 1)
+									echo "</tr>";
+								$i++;
+							} ?>
+						</table>
+					<?php endif; ?>
+				<?php } ?>
 			</div>
-
-			<?php if(app_has_recorded($session->instance['aa_inst_id'],$session->fb['fb_user_id']) == false): ?>
-			<!--
-			<div id="savesounds" class="alert alert-success span9">
-				<?php __p("Recording saved"); ?>
-			</div>
-			-->
-			<!-- Recorder -->
-			<div class="row show-grid">
-				<div class="span2">
-					<?php __p("Time"); ?>: <span id="time">00:00</span>
-				</div>
-				<div class="span4">
-					<?php __p("Status"); ?>: <span id="status"></span>
-				</div>
-				<div class="span6" id="levelbase" >
-					<div id="levelbar"></div>  
-				</div>
-			</div>
-
-				<div class="row show-grid">
-					<div class="span2" >
-						<a class="btn btn-danger" id="record" value="Record">
-							<i class="icon-volume-up icon-white"></i> <?php __p("Record"); ?>
-						</a>
-					</div>
-					<div class="span2">
-						<a class="btn" id="stop" value="Stop">
-							<i class="icon-stop icon-black"></i> <?php __p("Stop"); ?>
-						</a>
-					</div>
-					<div class="span2" id="img_tag">
-						<a class="btn" id="send" value="Send Data">
-							<i class="icon-upload icon-black"></i> <?php __p("Save"); ?>
-						</a>
-					</div>
-				</div>
-			<?php else: ?>
-			<!--
-				<div class="alert alert-success span9">
-					<?php //__p('You already record a message'); ?>
-				</div>
-				-->
-			<?php endif; ?>
-
-			<h4><?php __p('Recordings'); ?></h4>
-			<?php $rows=app_record_list($aa_inst_id); ?>
-			<?php if(count($rows) == 0): ?>
-				<div class="alert alert-block span9">
-				  <?php __p('Be the first to record something'); ?>
-				</div>
-			<?php else: ?>
-				<table class="table table-striped">
-					<?php 
-					$i = 0;
-					foreach($rows as $row){
-						if ( $i % 2 == 0)
-							echo "<tr>";
-					?>
-						<td><img src="https://graph.facebook.com/<?php echo $row['fb_user_id']; ?>/picture" alt="<?php echo $row['fb_user_name']; ?>" title="<?php echo $row['fb_user_name']; ?>"></td>
-						<td><audio src="<?=$row['sound_url']?>" preload="true"></audio></td>
-					<?php 
-						if ( $i % 2 == 1)
-							echo "</tr>";
-						$i++;
-					} ?>
-				</table>
-			<?php endif; ?>
-		<?php } ?>
+		</div>
 	</div> <!-- #main -->
 	
 	<!-- fb comment -->
