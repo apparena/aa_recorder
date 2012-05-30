@@ -408,7 +408,8 @@
 	<script>
    function flush_record_list()
    {
-         jQuery.get("record_list.php?aa_inst_id="+aa_inst_id,function(response){
+         var url="record_list.php?aa_inst_id="+aa_inst_id;
+         jQuery.get(url,function(response){
          jQuery("#record_list").hide();
          jQuery("#record_list").html(response);
          jQuery("#record_list").slideDown(600,function(){
