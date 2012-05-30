@@ -224,6 +224,8 @@
 		var fb_share_desc =  '<?=$session->config["fb_share_desc"]["value"]?>';
 		var fb_share_img='<?=$session->config["fb_share_img"]["value"]?>';
     var aa_inst_id=0;
+
+    var tag_image='';
 		
 		
 		$(document).ready(function() {
@@ -389,12 +391,14 @@
 	}
 	function callback_activityLevel(level){
 		$('#level').html(level);
+    /*
 		if(level == -1){
 		  $('#levelbar').css("width",  "2px");
 		}
 		else {
 		  $('#levelbar').css("width", (level * 2)+ "px");
 		}
+    */
 	}
       
  </script>

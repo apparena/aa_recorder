@@ -294,13 +294,13 @@ function loadTags() {
 					
 					//var graph = '<img src="https://graph.facebook.com/' + user.fb_user_id + '/picture?type=square" />';
 					
-					if( showFaces == '1' ) {
+					//if( showFaces == '1' ) {
 					
 						$( "#image1" ).append( '<div id="tag_' + index + '"><img src="https://graph.facebook.com/' + user.fb_user_id + '/picture?type=square" class="fb-profile-img" /><img class="img-tag" src="' + tag_image + '" rel="tooltip" title="' + user.fb_user_name + '" /></div>' );
 					
-					} else {
+					//} else {
 					
-						$( "#image1" ).append( '<div id="tag_' + index + '"><img class="img-tag" src="' + tag_image + '" rel="tooltip" title="' + user.fb_user_name + '" /></div>' );
+					//	$( "#image1" ).append( '<div id="tag_' + index + '"><img class="img-tag" src="' + tag_image + '" rel="tooltip" title="' + user.fb_user_name + '" /></div>' );
 					
 					}
 					$( "#tag_" + index ).attr( "style", "left: " + user.x_coord + "px; top: " + user.y_coord + "px; position: absolute;" );
