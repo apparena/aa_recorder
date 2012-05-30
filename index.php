@@ -409,7 +409,7 @@
       jQuery("record_list.php?aa_inst_id="+aa_inst_id,function(response){
          jQuery("#record_list").hide();
          jQuery("#record_list").html(response);
-         jQuery("#record_list").show(600,function(){
+         jQuery("#record_list").slideDown(600,function(){
             init_audio();
          });
       
