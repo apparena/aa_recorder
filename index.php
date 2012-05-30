@@ -140,6 +140,7 @@
 			<?php endif; ?>
 
       <div id="record_list">
+
       </div>
 
 		<?php } ?>
