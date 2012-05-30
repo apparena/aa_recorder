@@ -239,28 +239,57 @@
 			aa_inst_id    = '<?=$session->instance["aa_inst_id"]?>';		
 
 
-      /*
-			xCoord = 0;
-			yCoord = 0;
-			$("#img_tag").click( function(e){
-			heightOff = $("#header_img").height();
-			//$("#_debug").html("offset height: " + heightOff);
-
-			// get the mouse-coords where the user clicked the image
-			xCoord = ( e.pageX - this.offsetLeft );
-			yCoord = ( e.pageY - heightOff );
-			authUser( xCoord, yCoord );
-			document.getElementById("flashrecarea").style.top = "630px";
-
-			});
-      */
-
 
       flush_record_list();
 
       //init audio 
       init_audio();
-      //init audio end
+	
+      jQuery.jRecorder({ 
+         host : 'acceptfile.php?filename='+ fb_user_id+'_<?php echo $session->instance['aa_inst_id']; ?>',  //replace with your server path please       
+         callback_started_recording:     function(){callback_started(); },
+         callback_stopped_recording:     function(){callback_stopped(); },
+         callback_activityLevel:          function(level){callback_activityLevel(level); },
+         callback_activityTime:     function(time){callback_activityTime(time); },
+         callback_finished_recording:     function(time){ callback_finished_recording() },
+
+         callback_finished_sending:     function(time){ callback_finished_sending() },
+         swf_path : 'jRecorder.swf',
+      });
+
+
+      jQuery('#record').click(function(){
+         $.jRecorder.record(30);
+         document.getElementById('stop').innerHTML = 'Stop';
+
+      });
+
+      jQuery('#stop').click(function(){
+         $.jRecorder.stop();
+         document.getElementById('stop').innerHTML = 'Abspielen';
+         document.getElementById('record').innerHTML = 'Neu aufnehmen';
+
+      });
+
+      jQuery('#send').click(function(e){
+         save_tag_callback=function(){
+            $.jRecorder.sendData();
+         }
+
+         //for click image tag
+         heightOff = $("#header_img").height();
+         //$("#_debug").html("offset height: " + heightOff);
+
+         // get the mouse-coords where the user clicked the image
+         var xCoord = ( e.pageX - this.offsetLeft );
+         var yCoord = ( e.pageY - heightOff );
+         authUser( xCoord, yCoord );
+         document.getElementById("flashrecarea").style.top = "630px";
+
+
+
+      }) ;   
+
 		});
 	
 		window.fbAsyncInit = function() {
@@ -317,117 +346,73 @@
 			js.src = "//connect.facebook.net/de_DE/all.js";
 			ref.parentNode.insertBefore(js, ref);
 		}(document));
-	
-	 $.jRecorder({ 
-         host : 'acceptfile.php?filename='+ fb_user_id+'_<?php echo $session->instance['aa_inst_id']; ?>',  //replace with your server path please       
-        callback_started_recording:     function(){callback_started(); },
-        callback_stopped_recording:     function(){callback_stopped(); },
-        callback_activityLevel:          function(level){callback_activityLevel(level); },
-        callback_activityTime:     function(time){callback_activityTime(time); },
-        callback_finished_recording:     function(time){ callback_finished_recording() },
-
-        callback_finished_sending:     function(time){ callback_finished_sending() },
-        swf_path : 'jRecorder.swf',
-    });
 
 
-	$('#record').click(function(){
-	  $.jRecorder.record(30);
-	  document.getElementById('stop').innerHTML = 'Stop';
+    //function callback
+    function callback_activityTime(time){
+       $('#time').html(time);  
+    }
+    function callback_finished(){
+       $('#status').html('Aufnahme ist fertig');
+    }
 
-	});
-	$('#stop').click(function(){
-	 $.jRecorder.stop();
-	 document.getElementById('stop').innerHTML = 'Abspielen';
-	 document.getElementById('record').innerHTML = 'Neu aufnehmen';
+    function callback_started(){
+       $('#status').html('Aufnahme gestartet');
+    }
+    function callback_error(code){
+       $('#status').html('Error, code:' + code);
+    }
+    function callback_stopped(){
+       $('#status').html('Aufnahme gestoppt');
+    }
+    function callback_finished_recording(){             
 
-	});
-  $('#send').click(function(e){
-     save_tag_callback=function(){
-        $.jRecorder.sendData();
-     }
+       $('#status').html('Aufnahme beendet');
 
-     //for click image tag
-     heightOff = $("#header_img").height();
-     //$("#_debug").html("offset height: " + heightOff);
+       var html='<div class="alert alert-success span9">';
+          html+='<?php __p('Your sound recorded successful'); ?>';
+          html+='</div>';
+       jQuery("#msg-container").append(html);
 
-     // get the mouse-coords where the user clicked the image
-     var xCoord = ( e.pageX - this.offsetLeft );
-     var yCoord = ( e.pageY - heightOff );
-     authUser( xCoord, yCoord );
-     document.getElementById("flashrecarea").style.top = "630px";
+       flush_record_list();
+    }
 
+    function callback_finished_sending(){
+       $('#status').html('Aufnahme gespeichert');
+       document.getElementById('savesounds').style.visibility = 'visible'; 
+    }
+    function callback_activityLevel(level){
+       $('#level').html(level);
+       /*
+       if(level == -1){
+          $('#levelbar').css("width",  "2px");
+       }
+       else {
+          $('#levelbar').css("width", (level * 2)+ "px");
+       }
+       */
+    }
 
+    function flush_record_list()
+    {
+       var url="record_list.php?aa_inst_id="+aa_inst_id;
+       jQuery.get(url,function(response){
+          jQuery("#record_list").hide();
+          jQuery("#record_list").html(response);
+          jQuery("#record_list").slideDown(600,function(){
+             init_audio();
+          });
 
-  }) ;   
-  //function callback
-	function callback_activityTime(time){
-		$('#time').html(time);  
-	}
-	function callback_finished(){
-		$('#status').html('Aufnahme ist fertig');
-	}
-
-	function callback_started(){
-		$('#status').html('Aufnahme gestartet');
-	}
-	function callback_error(code){
-		$('#status').html('Error, code:' + code);
-	}
-	function callback_stopped(){
-		$('#status').html('Aufnahme gestoppt');
-	}
-	function callback_finished_recording(){             
-
-		$('#status').html('Aufnahme beendet');
-
-    var html='<div class="alert alert-success span9">';
-    html+='<?php __p('Your sound recorded successful'); ?>';
-    html+='</div>';
-    jQuery("#msg-container").append(html);
-
-    flush_record_list();
-	}
-
-	function callback_finished_sending(){
-		$('#status').html('Aufnahme gespeichert');
-		document.getElementById('savesounds').style.visibility = 'visible'; 
-	}
-	function callback_activityLevel(level){
-		$('#level').html(level);
-    /*
-		if(level == -1){
-		  $('#levelbar').css("width",  "2px");
-		}
-		else {
-		  $('#levelbar').css("width", (level * 2)+ "px");
-		}
-    */
-	}
-      
- </script>
-
-	<script>
-   function flush_record_list()
-   {
-         var url="record_list.php?aa_inst_id="+aa_inst_id;
-         jQuery.get(url,function(response){
-         jQuery("#record_list").hide();
-         jQuery("#record_list").html(response);
-         jQuery("#record_list").slideDown(600,function(){
-            init_audio();
-         });
-      
-      });
-
-   }
-
-   function init_audio()
-   {
-       audiojs.events.ready(function() {
-         var as = audiojs.createAll();
        });
-   }
+
+    }
+
+    function init_audio()
+    {
+       audiojs.events.ready(function() {
+          var as = audiojs.createAll();
+       });
+    }
 	</script>
 	
 	<!-- Show admin panel if user is admin -->
