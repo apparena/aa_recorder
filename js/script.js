@@ -234,7 +234,6 @@ function saveTag( xCoord, yCoord ) {
 				//} else {
 				
 				//	$( "#image1" ).append( '<div id="tag_new"><img class="img-tag" src="' + tag_image + '" rel="tooltip" title="' + fb_user_name + '" /></div>' );
-				
 				//}
 				
 				$( "#tag_new" ).attr( "style", "left: " + xCoord + "px; top: " + yCoord + "px; position: absolute;" );
