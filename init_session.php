@@ -9,16 +9,20 @@
 	 * NOTE that the aa_inst_id is needed here as a GET parameter!      *
 	 ********************************************************************/
 	
-	if( isset( $_REQUEST['aa_inst_id'] ) ) {
-		
-		$aa_inst_id = $_REQUEST['aa_inst_id'];
-		
-	} else {
-		
-		die( "invalid session! exiting..." );
-		exit( -1 );
-		
-	}
+   if(isset($_GET['aa_inst_id']))
+   {
+      $aa_inst_id=$_GET['aa_inst_id'];
+   }
+   else if(isset($_POST['aa_inst_id']))
+   {
+      $aa_inst_id=$_POST['aa_inst_id'];
+   }
+   else {
+
+      die( "invalid session! exiting..." );
+      exit( -1 );
+
+   }
 	
 /*
  * Initial process to start the app

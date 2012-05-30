@@ -49,9 +49,13 @@ addDb(array(
 
 // Initialize App-Manager connection
 
-if(isset($_REQUEST['aa_inst_id']))
+if(isset($_GET['aa_inst_id']))
 {
- $aa_inst_id=$_REQUEST['aa_inst_id'];
+ $aa_inst_id=$_GET['aa_inst_id'];
+}
+else if(isset($_POST['aa_inst_id']))
+{
+ $aa_inst_id=$_POST['aa_inst_id'];
 }
 else
 {
