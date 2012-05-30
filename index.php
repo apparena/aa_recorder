@@ -428,16 +428,11 @@
 	</script>
 	
 	<!-- Show admin panel if user is admin -->
-	<?php // Show admin panel, when page admin
-	if (is_admin() ) 
-	{
-		include_once 'admin/admin_panel.php';?>		
-	<?php } ?>
-</body>
-</html>
- (is_admin() ) 
-	{
-		include_once 'admin/admin_panel.php';?>		
-	<?php } ?>
+  <?php // Show admin panel, when page admin
+     if (is_admin() ) 
+     {
+        include_once 'admin/admin_panel.php';
+     } 
+  ?>
 </body>
 </html>
