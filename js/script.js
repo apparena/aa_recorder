@@ -302,7 +302,7 @@ function loadTags() {
 					
 					//	$( "#image1" ).append( '<div id="tag_' + index + '"><img class="img-tag" src="' + tag_image + '" rel="tooltip" title="' + user.fb_user_name + '" /></div>' );
 					
-					}
+					//}
 					$( "#tag_" + index ).attr( "style", "left: " + user.x_coord + "px; top: " + user.y_coord + "px; position: absolute;" );
 					
 					$( "[rel=tooltip]" ).tooltip();
