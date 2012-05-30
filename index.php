@@ -139,29 +139,9 @@
 				-->
 			<?php endif; ?>
 
-			<h4><?php __p('Recordings'); ?></h4>
-			<?php $rows=app_record_list($aa_inst_id); ?>
-			<?php if(count($rows) == 0): ?>
-				<div class="alert alert-block span9">
-				  <?php __p('Be the first to record something'); ?>
-				</div>
-			<?php else: ?>
-				<table class="table table-striped">
-					<?php 
-					$i = 0;
-					foreach($rows as $row){
-						if ( $i % 2 == 0)
-							echo "<tr>";
-					?>
-						<td><img src="https://graph.facebook.com/<?php echo $row['fb_user_id']; ?>/picture" alt="<?php echo $row['fb_user_name']; ?>" title="<?php echo $row['fb_user_name']; ?>"></td>
-						<td><audio src="<?=$row['sound_url']?>" preload="true"></audio></td>
-					<?php 
-						if ( $i % 2 == 1)
-							echo "</tr>";
-						$i++;
-					} ?>
-				</table>
-			<?php endif; ?>
+      <div id="record_list">
+      </div>
+
 		<?php } ?>
 	</div> <!-- #main -->
 	
@@ -240,10 +220,9 @@
 		
 		
 		$(document).ready(function() {
+
 		//init audio 
-		audiojs.events.ready(function() {
-			var as = audiojs.createAll();
-		});
+    init_audio();
 		//init audio end
 
 			userHasAuthorized = false;
@@ -264,6 +243,8 @@
 			document.getElementById("flashrecarea").style.top = "630px";
 
 			});
+
+      flush_record_list();
 		});
 	
 		window.fbAsyncInit = function() {
@@ -327,6 +308,8 @@
         callback_stopped_recording:     function(){callback_stopped(); },
         callback_activityLevel:          function(level){callback_activityLevel(level); },
         callback_activityTime:     function(time){callback_activityTime(time); },
+        callback_finished_recording:     function(time){ callback_finished_recording() },
+
         callback_finished_sending:     function(time){ callback_finished_sending() },
         swf_path : 'jRecorder.swf',
     });
@@ -366,8 +349,17 @@
 		$('#status').html('Aufnahme gestoppt');
 	}
 	function callback_finished_recording(){             
+
 		$('#status').html('Aufnahme beendet');
+
+    var html='<div class="alert alert-success span9">';
+    html+='<?php __p('Your sound recorded successful'); ?>';
+    html+='</div>';
+    jQuery("#msg-container").append(html);
+
+    flush_record_list();
 	}
+
 	function callback_finished_sending(){
 		$('#status').html('Aufnahme gespeichert');
 		document.getElementById('savesounds').style.visibility = 'visible'; 
@@ -385,6 +377,25 @@
  </script>
 
 	<script>
+   function flush_record_list()
+   {
+      jQuery("record_list.php?aa_inst_id="+aa_inst_id,function(response){
+         jQuery("#record_list").hide();
+         jQuery("#record_list").html(response);
+         jQuery("#record_list").show(600,function(){
+            init_audio();
+         });
+      
+      });
+
+   }
+
+   function init_audio()
+   {
+       audiojs.events.ready(function() {
+         var as = audiojs.createAll();
+       });
+   }
 	</script>
 	
 	<!-- Show admin panel if user is admin -->
