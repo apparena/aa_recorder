@@ -143,10 +143,12 @@
 				</div>
 				-->
 			<?php endif; ?>
-
-      <div id="record_list">
-
-      </div>
+			
+			<div class="row">
+	      		<div id="record_list" class="span10">
+	
+	      		</div>
+      		</div>
 
 		<?php } ?>
 	</div> <!-- #main -->
@@ -428,6 +430,12 @@
 	<!-- Show admin panel if user is admin -->
 	<?php // Show admin panel, when page admin
 	if (is_admin() ) 
+	{
+		include_once 'admin/admin_panel.php';?>		
+	<?php } ?>
+</body>
+</html>
+ (is_admin() ) 
 	{
 		include_once 'admin/admin_panel.php';?>		
 	<?php } ?>
