@@ -223,6 +223,7 @@
 		var fb_share_subtitle= '<?=$session->config["fb_share_subtitle"]["value"]?>';
 		var fb_share_desc =  '<?=$session->config["fb_share_desc"]["value"]?>';
 		var fb_share_img='<?=$session->config["fb_share_img"]["value"]?>';
+    var aa_inst_id=0;
 		
 		
 		$(document).ready(function() {
