@@ -82,7 +82,8 @@ function microphone_recorder_events()
      $('#status').html('Aufnahme beendet');
 
      var html='<div class="alert alert-success span9">';
-     html+='<?php __p('Your sound recorded successful'); ?>';
+     //html+='<?php __p('Your sound recorded successful'); ?>';
+     html+='Your sound recorded successful';
      html+='</div>';
      jQuery("#msg-container").append(html);
 
