@@ -2,6 +2,7 @@
 function microphone_recorder_events()
 {
   //$('#status').text("Microphone recorder event: " + arguments[0]);
+  Recorder.status=arguments[0];
 
   switch(arguments[0]) {
   case "ready":
@@ -103,6 +104,7 @@ function microphone_recorder_events()
 }
 
 Recorder = {
+   status:'not_ready',
   recorder: null,
   recorderOriginalWidth: 0,
   recorderOriginalHeight: 0,
@@ -139,7 +141,13 @@ Recorder = {
   },
 
   record: function(name, filename) {
-    Recorder.recorder.record(name, filename);
+     if( (Recorder.status != "no_microphone_found")
+        && (Recorder.status != "microphone_not_connected")
+     && (Recorder.status != "microphone_user_request")
+     )
+     {
+        Recorder.recorder.record(name, filename);
+     }
   },
 
   resize: function(width, height) {
