@@ -277,6 +277,7 @@
       jQuery('#record').click(function(){
          //$.jRecorder.record(30);
 
+         alert(recorder_status);
          if(recorder_status != 'start')
          {
             Recorder.record('audio', 'audio.wav');
@@ -291,6 +292,7 @@
 
       jQuery('#stop').click(function(){
          //$.jRecorder.stop();
+         alert(recorder_status);
 
          if(recorder_status == 'start')
          {
