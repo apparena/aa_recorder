@@ -277,38 +277,18 @@
       jQuery('#record').click(function(){
          //$.jRecorder.record(30);
 
-         alert(recorder_status);
-         alert(Recorder.status);
+         Recorder.record('audio', 'audio.wav');
 
-         if(recorder_status != 'start')
-         {
-            if( (Recorder.status != "no_microphone_found")
-            && (Recorder.status != "microphone_not_connected")
-            && (Recorder.status != "microphone_user_request")
-         )
-         {
-            Recorder.record('audio', 'audio.wav');
+         recorder_status='start';
 
-            recorder_status='start';
-
-            $('#status').html('Aufnahme gestartet');
-            document.getElementById('stop').innerHTML = 'Stop';
-         }
-         }
+         $('#status').html('Aufnahme gestartet');
+         document.getElementById('stop').innerHTML = 'Stop';
 
       });
 
       jQuery('#stop').click(function(){
          //$.jRecorder.stop();
-         alert(recorder_status);
 
-         if(recorder_status == 'start')
-         {
-            if( (Recorder.status != "no_microphone_found")
-            && (Recorder.status != "microphone_not_connected")
-            && (Recorder.status != "microphone_user_request")
-         )
-         {
             Recorder.record('audio');
 
             recorder_status='stop';
@@ -316,10 +296,10 @@
 
             document.getElementById('stop').innerHTML = 'Abspielen';
             document.getElementById('record').innerHTML = 'Neu aufnehmen';
-         }
-         }
 
       });
+
+      jQuery('#stop').attr('disabled',true);
 
       jQuery('#send').click(function(e){
          save_tag_callback=function(){

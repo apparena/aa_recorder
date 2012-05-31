@@ -25,6 +25,10 @@ function microphone_recorder_events()
     break;
 
   case "microphone_connected":
+
+     recorder_status='start';
+
+
     var mic = arguments[1];
     Recorder.defaultSize();
     $('#upload_status').css({'color': '#000'}).text("Microphone: " + mic.name);
@@ -39,6 +43,8 @@ function microphone_recorder_events()
     break;
 
   case "recording":
+     jQuery('#stop').attr('disabled',false); //enable stop recording
+
     var name = arguments[1];
     Recorder.hide();
     $('#record_button img').attr('src', 'images/stop.png');
@@ -152,13 +158,7 @@ Recorder = {
   },
 
   record: function(name, filename) {
-     if( (Recorder.status != "no_microphone_found")
-        && (Recorder.status != "microphone_not_connected")
-     && (Recorder.status != "microphone_user_request")
-     )
-     {
-        Recorder.recorder.record(name, filename);
-     }
+     Recorder.recorder.record(name, filename);
   },
 
   resize: function(width, height) {
