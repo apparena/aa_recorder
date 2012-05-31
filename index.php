@@ -447,5 +447,14 @@
         include_once 'admin/admin_panel.php';
      } 
   ?>
+
+  <!-- audio form -->
+<form id="uploadForm" name="uploadForm" action="upload.php">
+<input name="authenticity_token" value="xxxxx" type="hidden">
+<input name="upload_file[parent_id]" value="1" type="hidden">
+<input name="format" value="json" type="hidden">
+</form>
+  <!-- audio form end-->
+
 </body>
 </html>

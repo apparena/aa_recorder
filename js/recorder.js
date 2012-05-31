@@ -1,7 +1,7 @@
 
 function microphone_recorder_events()
 {
-  $('#status').text("Microphone recorder event: " + arguments[0]);
+  //$('#status').text("Microphone recorder event: " + arguments[0]);
 
   switch(arguments[0]) {
   case "ready":
