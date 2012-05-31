@@ -190,8 +190,6 @@
 	<script src="js/script.js?v9"></script>
 	<script src="js/audiojs/audio.min.js?v3"> </script> 
 	<script src="js/libs/aa.js?v5"></script>
-  <script type="text/javascript" src="js/swfobject.js"></script>
-  <script type="text/javascript" src="js/recorder.js"></script>
 
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
   <script type="text/javascript" src="js/wami/recorder.js"></script>
@@ -259,24 +257,10 @@
 
       //init audio 
       init_audio();
-	
-      /*
-      jQuery.jRecorder({ 
-         host : 'acceptfile.php?filename='+ fb_user_id+'_<?php echo $session->instance['aa_inst_id']; ?>',  //replace with your server path please       
-         callback_started_recording:     function(){callback_started(); },
-         callback_stopped_recording:     function(){callback_stopped(); },
-         callback_activityLevel:          function(level){callback_activityLevel(level); },
-         callback_activityTime:     function(time){callback_activityTime(time); },
-         callback_finished_recording:     function(time){ callback_finished_recording() },
-
-         callback_finished_sending:     function(time){ callback_finished_sending() },
-         swf_path : 'jRecorder.swf',
-      });
-      */
 
 
       jQuery('#record').click(function(){
-         Wami.startRecording("acceptfile.php?aa_inst_id="+aa_inst_id);
+         Wami.startRecording("acceptfile.php?aa_inst_id=<?php echo $session->instance['aa_inst_id']; ?>");
 
          $('#status').html('Aufnahme gestartet');
          document.getElementById('stop').innerHTML = 'Stop';
