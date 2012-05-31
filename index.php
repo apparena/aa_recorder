@@ -278,6 +278,8 @@
          //$.jRecorder.record(30);
 
          alert(recorder_status);
+         alert(Recorder.status);
+
          if(recorder_status != 'start')
          {
             if( (Recorder.status != "no_microphone_found")
