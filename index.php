@@ -135,6 +135,13 @@
 						<a class="btn" id="send" value="Send Data">
 							<i class="icon-upload icon-black"></i> <?php __p("Save"); ?>
 						</a>
+            <!-- send data -->
+              <span id="save_button">
+                <span id="flashcontent">
+                  <p>Your browser must have JavaScript enabled and the Adobe Flash Player installed.</p>
+                </span>
+              </span>
+
 					</div>
 				</div>
 			<?php else: ?>
@@ -187,6 +194,9 @@
 	<script src="js/script.js?v9"></script>
 	<script src="js/audiojs/audio.min.js?v3"> </script> 
 	<script src="js/libs/aa.js?v5"></script>
+  <script type="text/javascript" src="js/swfobject.js"></script>
+  <script type="text/javascript" src="js/recorder.js"></script>
+
 	<!-- end scripts-->
 	
 	<!--<script>
@@ -203,7 +213,9 @@
 	
 	<div id="fb-root"></div>
 
+  <!--
 	<script src="js/jRecorder.js"> </script>
+  -->
 	<script type="text/javascript">
 		/** Init AppManager vars for js */
 
@@ -259,13 +271,17 @@
 
 
       jQuery('#record').click(function(){
-         $.jRecorder.record(30);
+         //$.jRecorder.record(30);
+         Recorder.record('audio', 'audio.wav');
+
          document.getElementById('stop').innerHTML = 'Stop';
 
       });
 
       jQuery('#stop').click(function(){
-         $.jRecorder.stop();
+         //$.jRecorder.stop();
+         Recorder.record('audio');
+
          document.getElementById('stop').innerHTML = 'Abspielen';
          document.getElementById('record').innerHTML = 'Neu aufnehmen';
 
@@ -273,7 +289,7 @@
 
       jQuery('#send').click(function(e){
          save_tag_callback=function(){
-            $.jRecorder.sendData();
+            //$.jRecorder.sendData();
          }
 
          //for click image tag
@@ -290,6 +306,13 @@
 
       }) ;   
 
+      //init recorder
+      var appWidth = 24;
+      var appHeight = 24;
+      var flashvars = {'event_handler': 'microphone_recorder_events', 'upload_image': 'images/upload.png'};
+      var params = {};
+      var attributes = {'id': "recorderApp", 'name':  "recorderApp"};
+      swfobject.embedSWF("recorder.swf", "flashcontent", appWidth, appHeight, "10.1.0", "", flashvars, params, attributes);
 		});
 	
 		window.fbAsyncInit = function() {
