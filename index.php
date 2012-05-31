@@ -135,14 +135,10 @@
 						<a class="btn" id="send" value="Send Data">
 							<i class="icon-upload icon-black"></i> <?php __p("Save"); ?>
 						</a>
-            <!-- send data -->
-              <span id="save_button">
-                <span id="flashcontent">
-                  <p>Your browser must have JavaScript enabled and the Adobe Flash Player installed.</p>
-                </span>
-              </span>
-
 					</div>
+
+          <div id="wami"></div>
+
 				</div>
 			<?php else: ?>
 			<!--
@@ -197,6 +193,10 @@
   <script type="text/javascript" src="js/swfobject.js"></script>
   <script type="text/javascript" src="js/recorder.js"></script>
 
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+  <script type="text/javascript" src="js/wami/recorder.js"></script>
+
+
 	<!-- end scripts-->
 	
 	<!--<script>
@@ -240,13 +240,14 @@
 		var fb_share_img='<?=$session->config["fb_share_img"]["value"]?>';
     var aa_inst_id=0;
 
-    var recorder_status='not ready'; //audio recorder status
-
     var tag_image='';
 		var userHasAuthorized = false;
 		
 		
     jQuery(document).ready(function() {
+       //init recorder
+       Wami.setup("wami");
+
 			userHasAuthorized = false;
 			fb_app_id     = '<?=$session->instance["fb_app_id"]?>';
 			fb_canvas_url = '<?=$session->instance["fb_canvas_url"]?>';
@@ -275,11 +276,7 @@
 
 
       jQuery('#record').click(function(){
-         //$.jRecorder.record(30);
-
-         Recorder.record('audio', 'audio.wav');
-
-         recorder_status='start';
+         Wami.startRecording("acceptfile.php?aa_inst_id="+aa_inst_id);
 
          $('#status').html('Aufnahme gestartet');
          document.getElementById('stop').innerHTML = 'Stop';
@@ -287,11 +284,9 @@
       });
 
       jQuery('#stop').click(function(){
-         //$.jRecorder.stop();
+         Wami.stopRecording();
+         Wami.stopPlaying();
 
-            Recorder.record('audio');
-
-            recorder_status='stop';
             $('#status').html('Aufnahme gestoppt');
 
             document.getElementById('stop').innerHTML = 'Abspielen';
@@ -316,16 +311,8 @@
          authUser( xCoord, yCoord );
          document.getElementById("flashrecarea").style.top = "630px";
 
-
       }) ;   
 
-      //init recorder
-      var appWidth = 24;
-      var appHeight = 24;
-      var flashvars = {'event_handler': 'microphone_recorder_events', 'upload_image': 'images/upload.png'};
-      var params = {};
-      var attributes = {'id': "recorderApp", 'name':  "recorderApp"};
-      swfobject.embedSWF("recorder.swf", "flashcontent", appWidth, appHeight, "10.1.0", "", flashvars, params, attributes);
 		});
 	
 		window.fbAsyncInit = function() {
@@ -458,18 +445,6 @@
         include_once 'admin/admin_panel.php';
      } 
   ?>
-
-  <!-- audio form -->
-<form id="uploadForm" name="uploadForm" action="acceptfile.php">
-<input name="authenticity_token" value="xxxxx" type="hidden">
-<input name="upload_file[parent_id]" value="1" type="hidden">
-
-<input name="fb_user_id" value="" type="hidden">
-<input name="aa_inst_id" value="<?php echo $session->instance['aa_inst_id']; ?>" type="hidden">
-
-<input name="format" value="json" type="hidden">
-</form>
-  <!-- audio form end-->
 
 </body>
 </html>
