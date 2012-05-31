@@ -79,12 +79,22 @@ function microphone_recorder_events()
     break;
 
   case "saved":
-    var name = arguments[1];
-    var data = $.parseJSON(arguments[2]);
-    if(data.saved) {
-      $('#upload_status').css({'color': '#0F0'}).text(name + " was saved");
-    } else {
-      $('#upload_status').css({'color': '#F00'}).text(name + " was not saved");
+     $('#status').html('Aufnahme beendet');
+
+     var html='<div class="alert alert-success span9">';
+     html+='<?php __p('Your sound recorded successful'); ?>';
+     html+='</div>';
+     jQuery("#msg-container").append(html);
+
+     flush_record_list();
+     /*
+     var name = arguments[1];
+     var data = $.parseJSON(arguments[2]);
+     if(data.saved) {
+     $('#upload_status').css({'color': '#0F0'}).text(name + " was saved");
+     } else {
+     $('#upload_status').css({'color': '#F00'}).text(name + " was not saved");
+     */
     }
     break;
 

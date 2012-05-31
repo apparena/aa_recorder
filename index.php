@@ -240,6 +240,8 @@
 		var fb_share_img='<?=$session->config["fb_share_img"]["value"]?>';
     var aa_inst_id=0;
 
+    var recorder_status='not ready'; //audio recorder status
+
     var tag_image='';
 		var userHasAuthorized = false;
 		
@@ -274,18 +276,32 @@
 
       jQuery('#record').click(function(){
          //$.jRecorder.record(30);
-         Recorder.record('audio', 'audio.wav');
 
-         document.getElementById('stop').innerHTML = 'Stop';
+         if(recorder_status != 'start')
+         {
+            Recorder.record('audio', 'audio.wav');
+
+            recorder_status='start';
+
+            $('#status').html('Aufnahme gestartet');
+            document.getElementById('stop').innerHTML = 'Stop';
+         }
 
       });
 
       jQuery('#stop').click(function(){
          //$.jRecorder.stop();
-         Recorder.record('audio');
 
-         document.getElementById('stop').innerHTML = 'Abspielen';
-         document.getElementById('record').innerHTML = 'Neu aufnehmen';
+         if(recorder_status == 'start')
+         {
+            Recorder.record('audio');
+
+            recorder_status='stop';
+            $('#status').html('Aufnahme gestoppt');
+
+            document.getElementById('stop').innerHTML = 'Abspielen';
+            document.getElementById('record').innerHTML = 'Neu aufnehmen';
+         }
 
       });
 
@@ -303,7 +319,6 @@
          var yCoord = ( e.pageY - heightOff );
          authUser( xCoord, yCoord );
          document.getElementById("flashrecarea").style.top = "630px";
-
 
 
       }) ;   
