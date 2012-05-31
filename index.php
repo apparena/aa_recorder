@@ -257,6 +257,7 @@
       //init audio 
       init_audio();
 	
+      /*
       jQuery.jRecorder({ 
          host : 'acceptfile.php?filename='+ fb_user_id+'_<?php echo $session->instance['aa_inst_id']; ?>',  //replace with your server path please       
          callback_started_recording:     function(){callback_started(); },
@@ -268,6 +269,7 @@
          callback_finished_sending:     function(time){ callback_finished_sending() },
          swf_path : 'jRecorder.swf',
       });
+      */
 
 
       jQuery('#record').click(function(){
