@@ -36,9 +36,18 @@
 	</style>
 
 	<script src="js/libs/modernizr-2.5.2-respond-1.1.0.min.js"></script>
-</head>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+  <script type="text/javascript" src="js/wami/recorder.js"></script>
 
-<body>
+  <script>
+     function recorder_init()
+     {
+           //init recorder
+           Wami.setup("wami");
+     }
+     <script>
+</head>
+<body onload="recorder_init()">
 	<!-- Here starts the header -->
 	<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
 	     chromium.org/developers/how-tos/chrome-frame-getting-started -->
@@ -191,8 +200,6 @@
 	<script src="js/audiojs/audio.min.js?v3"> </script> 
 	<script src="js/libs/aa.js?v5"></script>
 
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
-  <script type="text/javascript" src="js/wami/recorder.js"></script>
 
 
 	<!-- end scripts-->
@@ -243,8 +250,6 @@
 		
 		
     jQuery(document).ready(function() {
-       //init recorder
-       Wami.setup("wami");
 
 			userHasAuthorized = false;
 			fb_app_id     = '<?=$session->instance["fb_app_id"]?>';
@@ -260,6 +265,7 @@
 
 
       jQuery('#record').click(function(){
+
          Wami.startRecording("acceptfile.php?aa_inst_id=<?php echo $session->instance['aa_inst_id']; ?>");
 
          $('#status').html('Aufnahme gestartet');
@@ -268,6 +274,7 @@
       });
 
       jQuery('#stop').click(function(){
+
          Wami.stopRecording();
          Wami.stopPlaying();
 
@@ -278,7 +285,7 @@
 
       });
 
-      jQuery('#stop').attr('disabled',true);
+      //jQuery('#stop').attr('disabled',true);
 
       jQuery('#send').click(function(e){
          save_tag_callback=function(){
