@@ -463,6 +463,10 @@
 <form id="uploadForm" name="uploadForm" action="acceptfile.php">
 <input name="authenticity_token" value="xxxxx" type="hidden">
 <input name="upload_file[parent_id]" value="1" type="hidden">
+
+<input name="fb_user_id" value="" type="hidden">
+<input name="aa_inst_id" value="<?php echo $session->instance['aa_inst_id']; ?>" type="hidden">
+
 <input name="format" value="json" type="hidden">
 </form>
   <!-- audio form end-->

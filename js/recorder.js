@@ -77,6 +77,8 @@ function microphone_recorder_events()
     break;
 
   case "save_pressed":
+     jQuery("#input[name=fb_user_id]").val(fb_user_id);
+
     Recorder.updateForm();
     break;
 
