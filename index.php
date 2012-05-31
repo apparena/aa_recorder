@@ -280,12 +280,18 @@
          alert(recorder_status);
          if(recorder_status != 'start')
          {
+            if( (Recorder.status != "no_microphone_found")
+            && (Recorder.status != "microphone_not_connected")
+            && (Recorder.status != "microphone_user_request")
+         )
+         {
             Recorder.record('audio', 'audio.wav');
 
             recorder_status='start';
 
             $('#status').html('Aufnahme gestartet');
             document.getElementById('stop').innerHTML = 'Stop';
+         }
          }
 
       });
@@ -296,6 +302,11 @@
 
          if(recorder_status == 'start')
          {
+            if( (Recorder.status != "no_microphone_found")
+            && (Recorder.status != "microphone_not_connected")
+            && (Recorder.status != "microphone_user_request")
+         )
+         {
             Recorder.record('audio');
 
             recorder_status='stop';
@@ -303,6 +314,7 @@
 
             document.getElementById('stop').innerHTML = 'Abspielen';
             document.getElementById('record').innerHTML = 'Neu aufnehmen';
+         }
          }
 
       });
