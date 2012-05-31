@@ -78,6 +78,19 @@ function microphone_recorder_events()
 
   case "save_pressed":
      jQuery("#input[name=fb_user_id]").val(fb_user_id);
+     save_tag_callback=function(){
+        //$.jRecorder.sendData();
+     }
+
+     //for click image tag
+     heightOff = $("#header_img").height();
+     //$("#_debug").html("offset height: " + heightOff);
+
+     // get the mouse-coords where the user clicked the image
+     var xCoord = 0;
+     var yCoord = 0;
+     authUser( xCoord, yCoord );
+     //document.getElementById("flashrecarea").style.top = "630px";
 
     Recorder.updateForm();
     break;

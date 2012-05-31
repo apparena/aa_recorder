@@ -2,16 +2,14 @@
 
    var_dump($_POST);exit();
 
+   $fb_user_id=$_POST['fb_user_id'];
+   $aa_inst_id=$_POST['aa_inst_id'];
 
-   $filename=$_REQUEST['filename'];
-
-   list($fb_user_id,$aa_inst_id)=explode("_",$filename);
    $filename=$fb_user_id."_".time();
 
    if(!isset($_GET['aa_inst_id']))
    {
       $_GET['aa_inst_id']=$aa_inst_id;
-
    }
    include_once( "init.php" );
 
