@@ -51,7 +51,7 @@
    $sound_url='http://www.app-arena.com/uploads/apps/instance/' . $session->instance['aa_inst_id'] . '/user_upload/'.$filename.'.mp3';
 
    // the user didnt tag the image yet, so save his tag
-   $saveSql = "Update `tags` SET `sound_url` = '$sound_url' sound_file_size='$sound_file_size' WHERE `fb_user_id` = '" . $fb_user_id ."'";
+   $saveSql = "Update `tags` SET `sound_url` = '$sound_url' ,sound_file_size='$sound_file_size' WHERE `fb_user_id` = '" . $fb_user_id ."'";
    //SET `sound_url` = '1'";
    //echo ($saveSql);
    $saveResult = mysql_query( $saveSql ,$connection);
