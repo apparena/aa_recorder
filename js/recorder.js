@@ -95,8 +95,8 @@ function microphone_recorder_events()
      $('#upload_status').css({'color': '#0F0'}).text(name + " was saved");
      } else {
      $('#upload_status').css({'color': '#F00'}).text(name + " was not saved");
-     */
     }
+     */
     break;
 
   case "save_failed":
