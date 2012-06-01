@@ -127,9 +127,7 @@
 	
 			<?php if($has_recorded == false): ?>
 
-      <div id="wami-modal">
          <div id="wami"></div>
-      </div>
 
 				<!-- Recorder -->
 				<div class="row show-grid player-status-bar">
@@ -360,7 +358,8 @@
           var settings = Wami.getSettings();
           if (settings.microphone.granted == false) 
           {
-                jQuery('#wami-modal').modal();
+                //jQuery('#wami-modal').modal();
+                modal( 'Notice', 'please allowed to use the microphone', false );
 
                 Wami.show();
                 return false;
