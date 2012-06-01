@@ -286,7 +286,7 @@
 
 
                                     //
-                                    Wami.startRecording("acceptfile.php?aa_inst_id="+aa_inst_id+"&fb_user_id="+fb_user_id,"flush_record_list");
+                                    Wami.startRecording("acceptfile.php?aa_inst_id="+aa_inst_id+"&fb_user_id="+fb_user_id,"recorder_start","recorder_finish","recorder_failed");
 
                                     $('#status').html('Aufnahme gestartet');
                                     document.getElementById('stop').innerHTML = 'Stop';
@@ -308,7 +308,7 @@
             }
             else
             {
-               Wami.startRecording("acceptfile.php?aa_inst_id="+aa_inst_id+"&fb_user_id="+fb_user_id,"flush_record_list");
+               Wami.startRecording("acceptfile.php?aa_inst_id="+aa_inst_id+"&fb_user_id="+fb_user_id,"recorder_start","recorder_finish","recorder_failed");
 
                   $('#status').html('Aufnahme gestartet');
                   document.getElementById('stop').innerHTML = 'Stop';
@@ -327,15 +327,6 @@
             Wami.stopRecording();
             Wami.stopPlaying();
 
-            //show message and flush record list
-            $('#status').html('Aufnahme gespeichert');
-
-            var html='<div class="alert alert-success span9">';
-            html+='Aufnahme ist fertig';
-            html+='</div>';
-            jQuery("#msg-container").append(html);
-
-            //flush_record_list();
          };
 
          saveTag(0,0);
@@ -401,6 +392,27 @@
 			ref.parentNode.insertBefore(js, ref);
 		}(document));
 
+
+    function recorder_start()
+    {
+    }
+
+    function recorder_finish()
+    {
+       flush_record_list();
+
+       //show message and flush record list
+       $('#status').html('Aufnahme gespeichert');
+
+       var html='<div class="alert alert-success span9">';
+       html+='Aufnahme ist fertig';
+       html+='</div>';
+       jQuery("#msg-container").append(html);
+    }
+
+    function recorder_failed()
+    {
+    }
 
     function flush_record_list()
     {
