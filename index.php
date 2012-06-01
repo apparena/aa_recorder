@@ -156,8 +156,10 @@
              -->
              <button class="btn hide" id="stop" >
                 <i class="icon-stop icon-black"></i>
+                <span>
                 <?php __p("Stop"); ?>
                 <?php //__p('Stop & Saving'); ?>
+                </span>
              </button>
 					</div>
           <!--
@@ -422,9 +424,11 @@
 
 
          jQuery("#stop").attr('disabled',true);
+         jQuery("#stop span").text('<?php __p("Saving"); ?>');
 
          //save 
          save_tag_callback=function(){
+
             Wami.stopRecording();
             Wami.stopPlaying();
 
@@ -444,6 +448,7 @@
        flush_record_list();
 
        jQuery("#stop").hide();
+       jQuery("#stop span").text('<?php __p("Stop"); ?>');
 
        jQuery("#record span").text('<?php __p("recording again"); ?>');
        jQuery("#record").show();
