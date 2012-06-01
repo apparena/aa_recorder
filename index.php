@@ -155,8 +155,9 @@
 					<div class="span2 stop-container">
              -->
              <button class="btn hide" id="stop" >
-                <i class="icon-stop icon-black"></i> <?php __p("Stop"); ?>
-                <?php __p('Stop & Saving'); ?>
+                <i class="icon-stop icon-black"></i>
+                <?php __p("Stop"); ?>
+                <?php //__p('Stop & Saving'); ?>
              </button>
 					</div>
           <!--
