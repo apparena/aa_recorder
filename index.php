@@ -5,6 +5,11 @@
 
 	$aa_inst_id=$session->instance['aa_inst_id'];
 ?>
+<?php if(app_has_recorded($session->instance['aa_inst_id'],$session->fb['fb_user_id']) == true): ?>
+<?php $has_recorded=true; ?>
+<?php else: ?>
+<?php $has_recorded=false; ?>
+<?php endif; ?>
 
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
@@ -36,6 +41,8 @@
 	</style>
 
 	<script src="js/libs/modernizr-2.5.2-respond-1.1.0.min.js"></script>
+
+<?php if($has_recorded == false): ?>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
   <script type="text/javascript" src="js/wami/recorder.js"></script>
 
@@ -46,9 +53,16 @@
            Wami.setup("wami");
      }
      </script>
+
+     <?php endif; ?>
 </head>
 
+<?php if($has_recorded == false): ?>
 <body onload="recorder_init()">
+<?php else: ?>
+<body> 
+<?php endif; ?>
+
 	<!-- Here starts the header -->
 	<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
 	     chromium.org/developers/how-tos/chrome-frame-getting-started -->
@@ -80,10 +94,10 @@
 	
 	<!-- this is the div you can append info/alert/error messages to -->
 	<div id="msg-container">
-	<?php if(app_has_recorded($session->instance['aa_inst_id'],$session->fb['fb_user_id']) == true): ?>
-	<div class="alert alert-success span9">
-	<?php __p('You already record a message'); ?>
-	</div>
+	<?php if($has_recorded == true): ?>
+     <div class="alert alert-success span9">
+     <?php __p('You already record a message'); ?>
+     </div>
 	<?php endif; ?>
 
 	</div> 
@@ -115,7 +129,11 @@
 			<?php } ?>
 	
 	
-			<?php if(app_has_recorded($session->instance['aa_inst_id'],$session->fb['fb_user_id']) == false): ?>
+			<?php if($has_recorded == false): ?>
+      <div>
+         <div id="wami"></div>
+      </div>
+
 				<!-- Recorder -->
 				<div class="row show-grid player-status-bar">
 					<div class="span2 time-container">
@@ -151,15 +169,6 @@
 				</div>
 			<?php endif; ?>
 
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <div id="wami"></div>
 			
           <div class="row">
              <div id="record_list" class="span10">

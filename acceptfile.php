@@ -24,12 +24,6 @@
       mkdir($upload_path, 0777);
    }
 
-
-   /*
-   $fp = fopen($upload_path."/".$filename.".wav", "wb");
-   fwrite($fp, file_get_contents('php://input'));
-   fclose($fp);
-   */
    $wav_path = $upload_path.'/'.$filename.'.wav';
    $mp3_path = $upload_path.'/'.$filename.'.mp3';
 
