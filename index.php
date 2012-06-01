@@ -147,6 +147,14 @@
 						</a>
 					</div>
 
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
           <div id="wami"></div>
 
 				</div>
@@ -235,7 +243,7 @@
 		else
 		{
 			echo "var fb_user_id='';";
-			$fb_user_id=-1;
+      $fb_user_id=0;
 		}
 		?>
 		//defined post wall variables
@@ -258,7 +266,6 @@
 			aa_inst_id    = '<?=$session->instance["aa_inst_id"]?>';		
 
 
-
       flush_record_list();
 
       //init audio 
@@ -267,43 +274,77 @@
 
       jQuery('#record').click(function(){
 
-         Wami.startRecording("acceptfile.php?aa_inst_id=<?php echo $session->instance['aa_inst_id']; ?>");
+            if(fb_user_id == false)
+            {
+                  FB.login(function(response) {
+                        if (response.authResponse) {
+                              FB.api('/me', function(response) {
+                                    fb_user_id = response.id;
+                                    fb_user_name = response.name;
 
-         $('#status').html('Aufnahme gestartet');
-         document.getElementById('stop').innerHTML = 'Stop';
 
+                                    alert(aa_inst_id);
+                                    alert(fb_user_id);
+                                    //
+                                    Wami.startRecording("acceptfile.php?aa_inst_id="+aa_inst_id+"&fb_user_id="+fb_user_id);
+
+                                    $('#status').html('Aufnahme gestartet');
+                                    document.getElementById('stop').innerHTML = 'Stop';
+
+                                    //save fb user infromation
+                                    var params=new Object();
+                                    params['fb_user']=response;
+                                    params['action']='saveuser';
+                                    params['aa_inst_id']=aa_inst_id;
+
+                                    jQuery.post('fb_session.php',params);
+                              });
+                        }
+                        else
+                        {
+                              modal( 'Hinweis', 'Du musst die Abfrage zulassen um eine Aufnahme zu hinterlassen.', false );
+                        }
+                  }, {scope: 'publish_actions'});
+            }
+            else
+            {
+                  alert(aa_inst_id);
+                  alert(fb_user_id);
+                  Wami.startRecording("acceptfile.php?aa_inst_id="+aa_inst_id+"&fb_user_id="+fb_user_id);
+
+                  $('#status').html('Aufnahme gestartet');
+                  document.getElementById('stop').innerHTML = 'Stop';
+            }
       });
 
       jQuery('#stop').click(function(){
 
-         Wami.stopRecording();
-         Wami.stopPlaying();
+         $('#status').html('Aufnahme gestoppt');
 
-            $('#status').html('Aufnahme gestoppt');
+         document.getElementById('stop').innerHTML = 'Abspielen';
+         document.getElementById('record').innerHTML = 'Neu aufnehmen';
 
-            document.getElementById('stop').innerHTML = 'Abspielen';
-            document.getElementById('record').innerHTML = 'Neu aufnehmen';
+         //save 
+         save_tag_callback=function(){
+            Wami.stopRecording();
+            Wami.stopPlaying();
+
+            //show message and flush record list
+            $('#status').html('Aufnahme gespeichert');
+
+            var html='<div class="alert alert-success span9">';
+            html+='Aufnahme ist fertig';
+            html+='</div>';
+            jQuery("#msg-container").append(html);
+
+            flush_record_list();
+         };
+
+         saveTag(0,0);
+         //authUser( 0, 0);
 
       });
 
-      //jQuery('#stop').attr('disabled',true);
-
-      jQuery('#send').click(function(e){
-         save_tag_callback=function(){
-            //$.jRecorder.sendData();
-         }
-
-         //for click image tag
-         heightOff = $("#header_img").height();
-         //$("#_debug").html("offset height: " + heightOff);
-
-         // get the mouse-coords where the user clicked the image
-         var xCoord = ( e.pageX - this.offsetLeft );
-         var yCoord = ( e.pageY - heightOff );
-         authUser( xCoord, yCoord );
-         document.getElementById("flashrecarea").style.top = "630px";
-
-      }) ;   
 
 		});
 	
@@ -362,51 +403,6 @@
 			ref.parentNode.insertBefore(js, ref);
 		}(document));
 
-
-    //function callback
-    function callback_activityTime(time){
-       $('#time').html(time);  
-    }
-    function callback_finished(){
-       $('#status').html('Aufnahme ist fertig');
-    }
-
-    function callback_started(){
-       $('#status').html('Aufnahme gestartet');
-    }
-    function callback_error(code){
-       $('#status').html('Error, code:' + code);
-    }
-    function callback_stopped(){
-       $('#status').html('Aufnahme gestoppt');
-    }
-    function callback_finished_recording(){             
-
-       $('#status').html('Aufnahme beendet');
-
-       var html='<div class="alert alert-success span9">';
-          html+='<?php __p('Your sound recorded successful'); ?>';
-          html+='</div>';
-       jQuery("#msg-container").append(html);
-
-       flush_record_list();
-    }
-
-    function callback_finished_sending(){
-       $('#status').html('Aufnahme gespeichert');
-       document.getElementById('savesounds').style.visibility = 'visible'; 
-    }
-    function callback_activityLevel(level){
-       $('#level').html(level);
-       /*
-       if(level == -1){
-          $('#levelbar').css("width",  "2px");
-       }
-       else {
-          $('#levelbar').css("width", (level * 2)+ "px");
-       }
-       */
-    }
 
     function flush_record_list()
     {
