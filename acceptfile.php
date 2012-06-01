@@ -33,9 +33,9 @@
    fclose($fh);
 
    $wav_size=filesize($wav_path);
+
    //convert to mp3
    app_convert_wav_to_mp3($wav_path);
-
 
    $mp3_size=filesize($mp3_path);
 
@@ -44,15 +44,21 @@
    {
       $sound_url='https://www.app-arena.com/uploads/apps/instance/' . $aa_inst_id .  '/user_upload/'.$filename.'.wav';
       $sound_file_size=$wav_size;
+      $sound_path=$wav_path;
    }
    else
    {
       $sound_url='https://www.app-arena.com/uploads/apps/instance/' . $aa_inst_id . '/user_upload/'.$filename.'.mp3';
       $sound_file_size=$mp3_size;
+      $sound_path=$mp3_path;
    }
 
    // the user didnt tag the image yet, so save his tag
-   $sql = "Update `tags` SET `sound_url` = '$sound_url' ,sound_file_size='$sound_file_size' WHERE `fb_user_id` = '" . $fb_user_id ."'";
+   $sql = "Update `tags` 
+   SET `sound_url` = '$sound_url' 
+   ,sound_file_size='$sound_file_size' 
+   ,sound_path='$sound_path'
+   WHERE `fb_user_id` = '" . $fb_user_id ."'";
 
    getDb()->query($sql);
 
