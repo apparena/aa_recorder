@@ -441,7 +441,7 @@
        jQuery("#stop").hide();
 
        jQuery("#record").val('<?php __p("recording again"); ?>');
-       jQuery("#record").show();
+       jQuery("#record").css('display','block');
 
        jQuery("#stop").attr('disabled',false);
 
