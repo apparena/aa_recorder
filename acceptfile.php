@@ -38,6 +38,7 @@
    fwrite($fh, $content);
    fclose($fh);
 
+   echo filesize($wav_path);
    //convert to mp3
    app_convert_wav_to_mp3($wav_path);
 
