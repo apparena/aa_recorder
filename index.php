@@ -273,7 +273,7 @@
           init_audio();
 
           jQuery('#record').click(function(){
-                recorder_start_record();
+                recorder_pre_start_record();
           });
 
           jQuery('#stop').click(function(){
@@ -337,7 +337,7 @@
 		}(document));
 
 
-    function recorder_start_record()
+    function recorder_pre_start_record()
     {
        recorder_init();
        timer=setInterval(recorder_start_record,500);
