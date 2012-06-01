@@ -141,11 +141,13 @@
 							<i class="icon-stop icon-black"></i> <?php __p("Stop"); ?>
 						</a>
 					</div>
+          <!--
 					<div class="span2 save-container" id="img_tag">
 						<a class="btn" id="send" value="Send Data">
 							<i class="icon-upload icon-black"></i> <?php __p("Save"); ?>
 						</a>
 					</div>
+          -->
 
           <br/>
           <br/>
