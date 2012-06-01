@@ -338,27 +338,6 @@
 		}(document));
 
 
-    function recorder_start()
-    {
-    }
-
-    function recorder_finish()
-    {
-       flush_record_list();
-
-       //show message and flush record list
-       $('#status').html('Aufnahme gespeichert');
-
-       var html='<div class="alert alert-success span9">';
-       html+='Aufnahme ist fertig';
-       html+='</div>';
-       jQuery("#msg-container").append(html);
-    }
-
-    function recorder_failed()
-    {
-    }
-
     function recorder_start_record()
     {
           var settings = Wami.getSettings();
@@ -419,8 +398,8 @@
     {
          $('#status').html('Aufnahme gestoppt');
 
-         jQuery("#record").show();
-         jQuery("#stop").hide();
+
+         jQuery("#stop").attr('disabled',true);
 
          //save 
          save_tag_callback=function(){
@@ -431,6 +410,33 @@
 
          saveTag(0,0);
     
+    }
+
+
+    function recorder_start()
+    {
+    }
+
+    function recorder_finish()
+    {
+       flush_record_list();
+
+       jQuery("#stop").hide();
+       jQuery("#record").show();
+       jQuery("#stop").attr('disabled',false);
+
+
+       //show message and flush record list
+       $('#status').html('Aufnahme gespeichert');
+
+       var html='<div class="alert alert-success span9">';
+       html+='Aufnahme ist fertig';
+       html+='</div>';
+       jQuery("#msg-container").append(html);
+    }
+
+    function recorder_failed()
+    {
     }
 
     function flush_record_list()
