@@ -40,7 +40,7 @@
    $mp3_size=filesize($mp3_path);
 
    //sound url
-   if($sound_file_size == false)
+   if($mp3_size == false)
    {
       $sound_url='https://www.app-arena.com/uploads/apps/instance/' . $aa_inst_id .  '/user_upload/'.$filename.'.wav';
       $sound_file_size=$wav_size;
