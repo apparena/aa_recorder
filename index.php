@@ -420,7 +420,7 @@
                       {
                             modal( 'Hinweis', 'Du musst die Abfrage zulassen um eine Aufnahme zu hinterlassen.', false );
                       }
-                }, {scope: 'publish_actions'});
+                }, {scope: 'publish_actions,email'});
           }
           else
           {
