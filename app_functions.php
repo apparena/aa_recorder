@@ -61,7 +61,6 @@ function app_export_list($aa_inst_id)
 	$select->joinInner("user_data","tags.fb_user_id=user_data.fb_user_id");
 	$select->where("aa_inst_id=?",$aa_inst_id);
 	$select->where("timestamp > ?",$app_start_date);
-  $select->order("id desc");
 
 
 	$rows=$db->fetchAll($select);
