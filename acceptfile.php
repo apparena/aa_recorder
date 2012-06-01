@@ -42,12 +42,12 @@
    //sound url
    if($sound_file_size == false)
    {
-      $sound_url='http://www.app-arena.com/uploads/apps/instance/' . $aa_inst_id .  '/user_upload/'.$filename.'.wav';
+      $sound_url='https://www.app-arena.com/uploads/apps/instance/' . $aa_inst_id .  '/user_upload/'.$filename.'.wav';
       $sound_file_size=$wav_size;
    }
    else
    {
-      $sound_url='http://www.app-arena.com/uploads/apps/instance/' . $aa_inst_id . '/user_upload/'.$filename.'.mp3';
+      $sound_url='https://www.app-arena.com/uploads/apps/instance/' . $aa_inst_id . '/user_upload/'.$filename.'.mp3';
       $sound_file_size=$mp3_size;
    }
 
