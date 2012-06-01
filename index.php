@@ -149,6 +149,15 @@
 					</div>
           -->
 
+				</div>
+			<?php else: ?>
+			<!--
+				<div class="alert alert-success span9">
+					<?php //__p('You already record a message'); ?>
+				</div>
+				-->
+			<?php endif; ?>
+
           <br/>
           <br/>
           <br/>
@@ -158,15 +167,6 @@
           <br/>
           <br/>
           <div id="wami"></div>
-
-				</div>
-			<?php else: ?>
-			<!--
-				<div class="alert alert-success span9">
-					<?php //__p('You already record a message'); ?>
-				</div>
-				-->
-			<?php endif; ?>
 			
 			<div class="row">
 	      		<div id="record_list" class="span10">
