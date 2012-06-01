@@ -154,7 +154,7 @@
 					</div>
 					<div class="span2 stop-container">
              -->
-						<a class="btn hide" id="stop" value="Stop">
+						<a class="btn btn-danger hide" id="stop" value="Stop & Saving">
 							<i class="icon-stop icon-black"></i> <?php __p("Stop"); ?>
 						</a>
 					</div>
