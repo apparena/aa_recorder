@@ -130,9 +130,7 @@
 	
 	
 			<?php if($has_recorded == false): ?>
-      <div>
-         <div id="wami"></div>
-      </div>
+      <div id="wami"></div>
 
 				<!-- Recorder -->
 				<div class="row show-grid player-status-bar">
