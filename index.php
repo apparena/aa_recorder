@@ -140,7 +140,7 @@
 					<div class="span4 status-container">
 						<?php __p("Status"); ?>: <span id="status"></span>
 					</div>
-					<div class="span4 level-container" id="levelbase" >
+					<div class="span4 level-container hide" id="levelbase" >
 						<div id="levelbar"></div>  
 					</div>
 				</div>
@@ -150,9 +150,11 @@
 						<a class="btn btn-danger" id="record" value="Record">
 							<i class="icon-volume-up icon-white"></i> <?php __p("Record"); ?>
 						</a>
+            <!--
 					</div>
 					<div class="span2 stop-container">
-						<a class="btn" id="stop" value="Stop">
+             -->
+						<a class="btn hide" id="stop" value="Stop">
 							<i class="icon-stop icon-black"></i> <?php __p("Stop"); ?>
 						</a>
 					</div>
