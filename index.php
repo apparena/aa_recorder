@@ -358,12 +358,14 @@
 		}(document));
 
 
+    //start record, but set interval to wait recorder setup success
     function recorder_pre_start_record()
     {
        recorder_init();
        timer=setInterval(recorder_start_record,500);
     }
 
+    //record , but only work when  recorder setup finished
     function recorder_start_record()
     {
        if(Wami && typeof Wami.show == 'function')
@@ -431,6 +433,7 @@
           }
     }
 
+    //stop record ,and save
     function recorder_stop_record()
     {
          $('#status').html('Aufnahme gestoppt');
@@ -452,10 +455,12 @@
     }
 
 
+    //will can when start record
     function recorder_start()
     {
     }
 
+    //will can when finish record
     function recorder_finish()
     {
        flush_record_list();
@@ -490,10 +495,12 @@
        }
     }
 
+    //will can when record failed
     function recorder_failed()
     {
     }
 
+    //get record list ,update 
     function flush_record_list()
     {
        var url="record_list.php?aa_inst_id="+aa_inst_id;
@@ -508,6 +515,7 @@
 
     }
 
+    //init audio player
     function init_audio()
     {
        audiojs.events.ready(function() {
