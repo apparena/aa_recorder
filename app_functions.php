@@ -41,6 +41,7 @@ function app_record_list($aa_inst_id)
 	$select->from("tags","*");
 	$select->where("aa_inst_id=?",$aa_inst_id);
 	$select->where("timestamp > ?",$app_start_date);
+  $select->order("id desc");
 
 
 	$rows=$db->fetchAll($select);
