@@ -110,7 +110,7 @@
 			<?php if ( $session->config['admin_audio_intro_activated']['value'] ){ ?>
 				<div class="audio-introduction">
 				<!-- Player -->
-        <audio id="audio1" src="<?php echo $session->config['audio_intro_url']['value']; ?>" preload="auto" ></audio>
+        <audio id="audio1" src="<?php echo $session->config['audio_intro_url']['value']; ?>" preload="auto" controls></audio>
 				</div>
 			<?php } ?>
 	

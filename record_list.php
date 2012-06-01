@@ -17,7 +17,7 @@ $i = 0;
 			echo "<tr>";
 		?>
 			<td><img src="https://graph.facebook.com/<?php echo $row['fb_user_id']; ?>/picture" alt="<?php echo $row['fb_user_name']; ?>" title="<?php echo $row['fb_user_name']; ?>"></td>
-			<td><audio src="<?=$row['sound_url']?>" preload="true"></audio></td>
+			<td><audio src="<?=$row['sound_url']?>" preload="true" controls></audio></td>
 			<?php 
 			if ( $i % 2 == 1)
 				echo "</tr>";
