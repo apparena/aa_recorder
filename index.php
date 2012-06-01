@@ -445,7 +445,7 @@
 
        jQuery("#stop").hide();
 
-       jQuery("#record span").val('<?php __p("recording again"); ?>');
+       jQuery("#record span").text('<?php __p("recording again"); ?>');
        jQuery("#record").show();
 
        jQuery("#stop").attr('disabled',false);
