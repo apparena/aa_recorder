@@ -151,7 +151,7 @@
 					</div>
 					<div class="span2 stop-container">
              -->
-						<a class="btn btn-danger hide" id="stop" value="Stop & Saving">
+						<a class="btn hide" id="stop" value="Stop & Saving">
 							<i class="icon-stop icon-black"></i> <?php __p("Stop"); ?>
 						</a>
 					</div>
@@ -439,7 +439,10 @@
        flush_record_list();
 
        jQuery("#stop").hide();
+
+       jQuery("#record").val('<?php __p("recording again"); ?>');
        jQuery("#record").show();
+
        jQuery("#stop").attr('disabled',false);
 
 
