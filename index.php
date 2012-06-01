@@ -260,6 +260,9 @@
 
     var fb_canvas_url = '<?=$session->instance["fb_canvas_url"]?>';
 
+    var recorder_timer= false; //js recorder's timer
+
+
     var tag_image='';
 		var userHasAuthorized = false;
 		
@@ -340,6 +343,21 @@
 
     function recorder_start_record()
     {
+       recorder_init();
+       timer=setInterval(recorder_start_record,500);
+    }
+
+    function recorder_start_record()
+    {
+       if(Wami && typeof Wami.show == 'function')
+       {
+          window.clearInterval(timer);
+       }
+       else
+       {
+          return false;
+       }
+
           var settings = Wami.getSettings();
           if (settings.microphone.granted == false) 
           {
