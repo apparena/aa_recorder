@@ -38,21 +38,23 @@
    fwrite($fh, $content);
    fclose($fh);
 
-   echo filesize($wav_path);
+   $wav_size=filesize($wav_path);
    //convert to mp3
    app_convert_wav_to_mp3($wav_path);
 
 
-   $sound_file_size=filesize($mp3_path);
+   $mp3_size=filesize($mp3_path);
 
    //sound url
    if($sound_file_size == false)
    {
       $sound_url='http://www.app-arena.com/uploads/apps/instance/' . $aa_inst_id .  '/user_upload/'.$filename.'.wav';
+      $sound_file_size=$wav_size;
    }
    else
    {
       $sound_url='http://www.app-arena.com/uploads/apps/instance/' . $aa_inst_id . '/user_upload/'.$filename.'.mp3';
+      $sound_file_size=$mp3_size;
    }
 
    // the user didnt tag the image yet, so save his tag
