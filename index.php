@@ -57,11 +57,7 @@
      <?php endif; ?>
 </head>
 
-<?php if($has_recorded == false): ?>
-<body onload="recorder_init()">
-<?php else: ?>
-<body> 
-<?php endif; ?>
+<body>
 
 	<!-- Here starts the header -->
 	<!-- Prompt IE 6 users to install Chrome Frame. Remove this if you support IE 6.
