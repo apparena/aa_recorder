@@ -144,16 +144,16 @@
 
 				<div class="row show-grid player-control">
 					<div class="span2 record-container" >
-						<a class="btn btn-danger" id="record" value="Record">
+             <button class="btn btn-danger" id="record" value="Record">
 							<i class="icon-volume-up icon-white"></i> <?php __p("Record"); ?>
-						</a>
+              </button>
             <!--
 					</div>
 					<div class="span2 stop-container">
              -->
-						<a class="btn hide" id="stop" value="Stop & Saving">
+             <button class="btn hide" id="stop" value="Stop & Saving">
 							<i class="icon-stop icon-black"></i> <?php __p("Stop"); ?>
-						</a>
+              </button>
 					</div>
           <!--
 					<div class="span2 save-container" id="img_tag">
@@ -441,7 +441,7 @@
        jQuery("#stop").hide();
 
        jQuery("#record").val('<?php __p("recording again"); ?>');
-       jQuery("#record").css('display','block');
+       jQuery("#record").show();
 
        jQuery("#stop").attr('disabled',false);
 
