@@ -46,7 +46,14 @@
    $sound_file_size=filesize($mp3_path);
 
    //sound url
-   $sound_url='http://www.app-arena.com/uploads/apps/instance/' . $aa_inst_id . '/user_upload/'.$filename.'.mp3';
+   if($sound_file_size == false)
+   {
+      $sound_url='http://www.app-arena.com/uploads/apps/instance/' . $aa_inst_id .  '/user_upload/'.$filename.'.wav';
+   }
+   else
+   {
+      $sound_url='http://www.app-arena.com/uploads/apps/instance/' . $aa_inst_id . '/user_upload/'.$filename.'.mp3';
+   }
 
    // the user didnt tag the image yet, so save his tag
    $sql = "Update `tags` SET `sound_url` = '$sound_url' ,sound_file_size='$sound_file_size' WHERE `fb_user_id` = '" . $fb_user_id ."'";
