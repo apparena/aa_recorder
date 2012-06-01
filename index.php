@@ -253,34 +253,32 @@
 		var fb_share_link=  'https://apps.facebook.com/<?=$session->instance["fb_app_url"].'/fb_share.php?aa_inst_id='.$session->instance['aa_inst_id'] ?>';
 		var fb_share_subtitle= '<?=$session->config["fb_share_subtitle"]["value"]?>';
 		var fb_share_desc =  '<?=$session->config["fb_share_desc"]["value"]?>';
-		var fb_share_img='<?=$session->config["fb_share_img"]["value"]?>';
-    var aa_inst_id=0;
+    var fb_share_img='<?=$session->config["fb_share_img"]["value"]?>';
+    var aa_inst_id    = '<?=$session->instance["aa_inst_id"]?>';		
+
+    var fb_canvas_url = '<?=$session->instance["fb_canvas_url"]?>';
 
     var tag_image='';
 		var userHasAuthorized = false;
 		
-		
+
     jQuery(document).ready(function() {
 
-			userHasAuthorized = false;
-			fb_app_id     = '<?=$session->instance["fb_app_id"]?>';
-			fb_canvas_url = '<?=$session->instance["fb_canvas_url"]?>';
-			aa_inst_id    = '<?=$session->instance["aa_inst_id"]?>';		
+          userHasAuthorized = false;
 
+          flush_record_list();
 
-      flush_record_list();
+          //init audio 
+          init_audio();
 
-      //init audio 
-      init_audio();
+          jQuery('#record').click(function(){
+                recorder_start_record();
+          });
 
-
-      jQuery('#record').click(function(){
-            recorder_start_record();
-      });
-
-      jQuery('#stop').click(function(){
-            recorder_stop_record();
-      });
+          jQuery('#stop').click(function(){
+                recorder_stop_record();
+          });
+    });
 	
 		window.fbAsyncInit = function() {
 			if( typeof( fb_app_id ) == "undefined" ) {
