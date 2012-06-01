@@ -60,6 +60,7 @@
 	
 	$checkResult = mysql_query( $checkSql );
 	
+  /*
 	if( $checkResult ) {
 		
 		// the user already tagged the image
@@ -71,6 +72,7 @@
 		}
 		
 	}
+  */
 	
 	// the user didnt tag the image yet, so save his tag
 	$saveSql = "INSERT INTO `tags` 
