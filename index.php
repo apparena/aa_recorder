@@ -185,7 +185,7 @@
 	
 	<!-- fb comment -->
 	<?php $comment_link= $session->app['fb_share_url'] ; ?>
-	<div class="fb-comments" data-href="<?php echo $comment_link; ?>" data-num-posts="10" data-width="470"></div>
+	<div class="fb-comments" data-href="<?php echo $comment_link; ?>" data-num-posts="10" data-width="810"></div>
 
 	<div class="custom-footer">
 		<?php echo $session->config['custom_footer']['value']; ?>
