@@ -287,6 +287,19 @@
           jQuery('#stop').click(function(){
                 recorder_stop_record();
           });
+
+
+          //defined translation
+          try{
+             //set translate
+             var translation=<?php echo json_encode($global->translate->getMessages()); ?>;
+             set_translation(translation);
+          }
+          catch(e)
+          {
+             //frd.alert(__('About us'));
+          }
+
     });
 	
 		window.fbAsyncInit = function() {
@@ -362,15 +375,15 @@
           return false;
        }
 
-          var settings = Wami.getSettings();
-          if (settings.microphone.granted == false) 
-          {
-                //jQuery('#wami-modal').modal();
-                modal( 'Notice', 'please allowed to use the microphone', false );
+       var settings = Wami.getSettings();
+       if (settings.microphone.granted == false) 
+       {
+          //jQuery('#wami-modal').modal();
+          modal( '<?php __p("Notice"); ?>', '<?php __p("please allowed to use the microphone"); ?>', false );
 
-                Wami.show();
-                return false;
-          }
+          Wami.show();
+          return false;
+       }
 
 
           //unable record
@@ -459,10 +472,22 @@
        //show message and flush record list
        $('#status').html('Aufnahme gespeichert');
 
-       var html='<div class="alert alert-success span9">';
-       html+='Aufnahme ist fertig';
-       html+='</div>';
-       jQuery("#msg-container").append(html);
+
+       if(jQuery("#recorder_finish_msg").length == 0)
+       {
+          //append msg
+          var html='<div id="recorder_finish_msg" class="alert alert-success span9">';
+             //html+='Aufnahme ist fertig';
+             html+="<?php __p('Recording is finished'); ?>";
+             html+='</div>';
+
+          jQuery("#msg-container").append(html);
+       }
+       else
+       {
+          //update msg
+          jQuery("#recorder_finish_msg").text("<?php __p('Recording updated'); ?>");
+       }
     }
 
     function recorder_failed()
