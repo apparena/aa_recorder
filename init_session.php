@@ -70,6 +70,7 @@ addDb(array(
    'dbname'=>getConfig("database_name")
 ));
 
+getDb()->query("set time_zone='+2:00'");
 
 // Initialize App-Manager connection
 
