@@ -127,23 +127,8 @@
 	
 			<?php if($has_recorded == false): ?>
 
-      <div  id="wami-modal" class="modal">
-         <div class="modal-header">
-            <button data-dismiss="modal" class="close">×</button>
-            <!--
-            <h3>Modal header</h3>
-            -->
-         </div>
-         <div
-            class="modal-body">
-            <p>
-            <div id="wami"></div>
-            </p>
-         </div>
-         <div
-            class="modal-footer">
-            <a class="btn" href="#">Close</a>
-         </div>
+      <div id="wami-modal">
+         <div id="wami"></div>
       </div>
 
 				<!-- Recorder -->
