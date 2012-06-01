@@ -364,6 +364,7 @@
           var settings = Wami.getSettings();
           if (settings.microphone.granted == false) 
           {
+                modal( 'Notice', 'please allowed to use the microphone', false );
                 Wami.show();
                 return false;
           }
