@@ -430,11 +430,12 @@
 
     function init_audio()
     {
-       //return false; // use orginal html 5 audio 
 
        audiojs.events.ready(function() {
           var as = audiojs.createAll();
        });
+
+       //return false; // use orginal html 5 audio 
     }
 	</script>
 	
