@@ -110,8 +110,7 @@
 			<?php if ( $session->config['admin_audio_intro_activated']['value'] ){ ?>
 				<div class="audio-introduction">
 				<!-- Player -->
-        <audio id="audio1" src="<?php echo $session->config['audio_intro_url']['value']; ?>" preload="auto"
-     ></audio>
+        <audio id="audio1" src="<?php echo $session->config['audio_intro_url']['value']; ?>" preload="auto" ></audio>
 				</div>
 			<?php } ?>
 	
@@ -150,12 +149,6 @@
           -->
 
 				</div>
-			<?php else: ?>
-			<!--
-				<div class="alert alert-success span9">
-					<?php //__p('You already record a message'); ?>
-				</div>
-				-->
 			<?php endif; ?>
 
           <br/>
@@ -168,11 +161,11 @@
           <br/>
           <div id="wami"></div>
 			
-			<div class="row">
-	      		<div id="record_list" class="span10">
-	
-	      		</div>
-      		</div>
+          <div class="row">
+             <div id="record_list" class="span10">
+
+             </div>
+          </div>
 
 		<?php } ?>
 	</div> <!-- #main -->
@@ -285,8 +278,6 @@
                                     fb_user_name = response.name;
 
 
-                                    alert(aa_inst_id);
-                                    alert(fb_user_id);
                                     //
                                     Wami.startRecording("acceptfile.php?aa_inst_id="+aa_inst_id+"&fb_user_id="+fb_user_id);
 
@@ -310,8 +301,6 @@
             }
             else
             {
-                  alert(aa_inst_id);
-                  alert(fb_user_id);
                   Wami.startRecording("acceptfile.php?aa_inst_id="+aa_inst_id+"&fb_user_id="+fb_user_id);
 
                   $('#status').html('Aufnahme gestartet');
@@ -422,6 +411,8 @@
 
     function init_audio()
     {
+       return false; // use orginal html 5 audio 
+
        audiojs.events.ready(function() {
           var as = audiojs.createAll();
        });
