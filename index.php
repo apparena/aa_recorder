@@ -275,67 +275,12 @@
 
 
       jQuery('#record').click(function(){
-
-            if(fb_user_id == false)
-            {
-                  FB.login(function(response) {
-                        if (response.authResponse) {
-                              FB.api('/me', function(response) {
-                                    fb_user_id = response.id;
-                                    fb_user_name = response.name;
-
-
-                                    //
-                                    Wami.startRecording("acceptfile.php?aa_inst_id="+aa_inst_id+"&fb_user_id="+fb_user_id,"recorder_start","recorder_finish","recorder_failed");
-
-                                    $('#status').html('Aufnahme gestartet');
-                                    document.getElementById('stop').innerHTML = 'Stop';
-
-                                    //save fb user infromation
-                                    var params=new Object();
-                                    params['fb_user']=response;
-                                    params['action']='saveuser';
-                                    params['aa_inst_id']=aa_inst_id;
-
-                                    jQuery.post('fb_session.php',params);
-                              });
-                        }
-                        else
-                        {
-                              modal( 'Hinweis', 'Du musst die Abfrage zulassen um eine Aufnahme zu hinterlassen.', false );
-                        }
-                  }, {scope: 'publish_actions'});
-            }
-            else
-            {
-               Wami.startRecording("acceptfile.php?aa_inst_id="+aa_inst_id+"&fb_user_id="+fb_user_id,"recorder_start","recorder_finish","recorder_failed");
-
-                  $('#status').html('Aufnahme gestartet');
-                  document.getElementById('stop').innerHTML = 'Stop';
-            }
+            recorder_start_record();
       });
 
       jQuery('#stop').click(function(){
-
-         $('#status').html('Aufnahme gestoppt');
-
-         document.getElementById('stop').innerHTML = 'Abspielen';
-         document.getElementById('record').innerHTML = 'Neu aufnehmen';
-
-         //save 
-         save_tag_callback=function(){
-            Wami.stopRecording();
-            Wami.stopPlaying();
-
-         };
-
-         saveTag(0,0);
-         //authUser( 0, 0);
-
+            recorder_stop_record();
       });
-
-
-		});
 	
 		window.fbAsyncInit = function() {
 			if( typeof( fb_app_id ) == "undefined" ) {
@@ -412,6 +357,79 @@
 
     function recorder_failed()
     {
+    }
+
+    function recorder_start_record()
+    {
+          var settings = Wami.getSettings();
+          if (settings.microphone.granted == false) 
+          {
+                Wami.show();
+                return false;
+          }
+
+
+          //unable record
+
+          if(fb_user_id == false)
+          {
+                FB.login(function(response) {
+                      if (response.authResponse) {
+                            FB.api('/me', function(response) {
+                                  fb_user_id = response.id;
+                                  fb_user_name = response.name;
+
+
+                                  //
+                                  Wami.startRecording("acceptfile.php?aa_inst_id="+aa_inst_id+"&fb_user_id="+fb_user_id,"recorder_start","recorder_finish","recorder_failed");
+
+                                  $('#status').html('Aufnahme gestartet');
+
+                                  jQuery("#record").hide();
+                                  jQuery("#stop").show();
+
+                                  //save fb user infromation
+                                  var params=new Object();
+                                  params['fb_user']=response;
+                                  params['action']='saveuser';
+                                  params['aa_inst_id']=aa_inst_id;
+
+                                  jQuery.post('fb_session.php',params);
+                            });
+                      }
+                      else
+                      {
+                            modal( 'Hinweis', 'Du musst die Abfrage zulassen um eine Aufnahme zu hinterlassen.', false );
+                      }
+                }, {scope: 'publish_actions'});
+          }
+          else
+          {
+                Wami.startRecording("acceptfile.php?aa_inst_id="+aa_inst_id+"&fb_user_id="+fb_user_id,"recorder_start","recorder_finish","recorder_failed");
+
+                $('#status').html('Aufnahme gestartet');
+
+                jQuery("#record").hide();
+                jQuery("#stop").show();
+          }
+    }
+
+    function recorder_stop_record()
+    {
+         $('#status').html('Aufnahme gestoppt');
+
+         jQuery("#record").show();
+         jQuery("#stop").hide();
+
+         //save 
+         save_tag_callback=function(){
+            Wami.stopRecording();
+            Wami.stopPlaying();
+
+         };
+
+         saveTag(0,0);
+    
     }
 
     function flush_record_list()
