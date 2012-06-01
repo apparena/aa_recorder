@@ -126,7 +126,25 @@
 	
 	
 			<?php if($has_recorded == false): ?>
-      <div id="wami"></div>
+
+      <div  id="wami-modal" class="modal">
+         <div class="modal-header">
+            <button data-dismiss="modal" class="close">×</button>
+            <!--
+            <h3>Modal header</h3>
+            -->
+         </div>
+         <div
+            class="modal-body">
+            <p>
+            <div id="wami"></div>
+            </p>
+         </div>
+         <div
+            class="modal-footer">
+            <a class="btn" href="#">Close</a>
+         </div>
+      </div>
 
 				<!-- Recorder -->
 				<div class="row show-grid player-status-bar">
@@ -357,7 +375,7 @@
           var settings = Wami.getSettings();
           if (settings.microphone.granted == false) 
           {
-                jQuery('#wami').modal();
+                jQuery('#wami-modal').modal();
 
                 Wami.show();
                 return false;
