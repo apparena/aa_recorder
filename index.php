@@ -286,7 +286,7 @@
 
 
                                     //
-                                    Wami.startRecording("acceptfile.php?aa_inst_id="+aa_inst_id+"&fb_user_id="+fb_user_id);
+                                    Wami.startRecording("acceptfile.php?aa_inst_id="+aa_inst_id+"&fb_user_id="+fb_user_id,"flush_record_list");
 
                                     $('#status').html('Aufnahme gestartet');
                                     document.getElementById('stop').innerHTML = 'Stop';
@@ -308,7 +308,7 @@
             }
             else
             {
-                  Wami.startRecording("acceptfile.php?aa_inst_id="+aa_inst_id+"&fb_user_id="+fb_user_id);
+               Wami.startRecording("acceptfile.php?aa_inst_id="+aa_inst_id+"&fb_user_id="+fb_user_id,"flush_record_list");
 
                   $('#status').html('Aufnahme gestartet');
                   document.getElementById('stop').innerHTML = 'Stop';
@@ -335,7 +335,7 @@
             html+='</div>';
             jQuery("#msg-container").append(html);
 
-            flush_record_list();
+            //flush_record_list();
          };
 
          saveTag(0,0);
