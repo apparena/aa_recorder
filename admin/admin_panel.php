@@ -10,7 +10,7 @@ $(document).ready(function(){
         action: 'click',                          //options: 'click' or 'hover', action to trigger animation
         topPos: '0px',                          //position from the top/ use if tabLocation is left or right
         leftPos: '20px',                          //position from left/ use if tabLocation is bottom or top
-        fixedPosition: true,                      //options: true makes it stick(fixed position) on scroll
+        fixedPosition: true                      //options: true makes it stick(fixed position) on scroll
     });
 	$('.admin_panel').show();
 });
