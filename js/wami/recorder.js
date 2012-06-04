@@ -171,7 +171,7 @@ Wami.setup = function(options) {
 		}
 
 		var version = '10.0.0';
-		document.getElementById(id).innerHTML = '<span class="wami_error">'+WAMI requires Flash "
+		document.getElementById(id).innerHTML = '<span class="wami_error">'+"WAMI requires Flash "
 				+ version
 				+ " or greater<br />https://get.adobe.com/flashplayer/";
         + "</span>";
