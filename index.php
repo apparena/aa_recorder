@@ -213,9 +213,9 @@
 	<!-- scripts concatenated and minified via ant build script-->
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/plugins.js?v2"></script>
-	<script src="js/script.js?v9"></script>
-	<script src="js/audiojs/audio.min.js?v7"> </script> 
-	<script src="js/libs/aa.js?v5"></script>
+  <script src="js/script.js?v10"></script>
+	<script src="js/audiojs/audio.min.js?v8"> </script> 
+	<script src="js/libs/aa.js?v6"></script>
 
 
 
