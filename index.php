@@ -272,6 +272,38 @@
 		
 
     jQuery(document).ready(function() {
+       //check flash is installed and it's version
+       if(swfobject.hasFlashPlayerVersion("1"))
+       {
+          //check the version
+          if(swfobject.hasFlashPlayerVersion("10.0.0") == false)
+          {
+             var html='<div class="alert alert-error span9">';
+             html+="<?php __p('Please install flash version 10.0.0 or greater.'); ?>";
+             html+='<br/>';
+             html+='https://get.adobe.com/flashplayer/';
+             html+='</div>';
+
+             jQuery("#msg-container").append(html);
+
+             jQuery("#record").hide(); //hide record button
+          }
+       }
+       else
+       {
+
+          var html='<div class="alert alert-error span9">';
+          html+="<?php __p('Please install flash for your browser.'); ?>";
+          html+='<br/>';
+          html+='https://get.adobe.com/flashplayer/';
+          html+='</div>';
+
+          jQuery("#msg-container").append(html);
+
+          jQuery("#record").hide(); //hide record button
+       }
+
+
 
           userHasAuthorized = false;
 
