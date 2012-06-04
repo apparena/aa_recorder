@@ -215,7 +215,7 @@
 	<script src="js/plugins.js?v2"></script>
   <script src="js/script.js?v10"></script>
 	<script src="js/audiojs/audio.min.js?v8"> </script> 
-	<script src="js/libs/aa.js?v6"></script>
+	<script src="js/libs/aa.js?v7"></script>
 
 
 
