@@ -281,7 +281,7 @@
              var html='<div class="alert alert-error span9">';
              html+="<?php __p('Please install flash version 10.0.0 or greater.'); ?>";
              html+='<br/>';
-             html+='https://get.adobe.com/flashplayer/';
+             html+='<a href="https://get.adobe.com/flashplayer/" target="_blank"> https://get.adobe.com/flashplayer/</a>';
              html+='</div>';
 
              jQuery("#msg-container").append(html);
@@ -295,7 +295,7 @@
           var html='<div class="alert alert-error span9">';
           html+="<?php __p('Please install flash for your browser.'); ?>";
           html+='<br/>';
-          html+='https://get.adobe.com/flashplayer/';
+          html+='<a href="https://get.adobe.com/flashplayer/" target="_blank"> https://get.adobe.com/flashplayer/</a>';
           html+='</div>';
 
           jQuery("#msg-container").append(html);
