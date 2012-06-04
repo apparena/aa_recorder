@@ -44,7 +44,7 @@
 
 <?php if($has_recorded == false): ?>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
-  <script type="text/javascript" src="js/wami/recorder.js"></script>
+  <script type="text/javascript" src="js/wami/recorder.js?v2"></script>
 
   <script>
      function recorder_init()
