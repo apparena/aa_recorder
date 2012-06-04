@@ -171,9 +171,10 @@ Wami.setup = function(options) {
 		}
 
 		var version = '10.0.0';
-		document.getElementById(id).innerHTML = "WAMI requires Flash "
+		document.getElementById(id).innerHTML = '<span class="wami_error">'+WAMI requires Flash "
 				+ version
 				+ " or greater<br />https://get.adobe.com/flashplayer/";
+        + "</span>";
 
 		// This is the minimum size due to the microphone security panel
 		Wami.swfobject.embedSWF(_options.swfUrl, id, 214, 137, version, null,
