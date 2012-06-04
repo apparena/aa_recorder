@@ -42,8 +42,9 @@
 
 	<script src="js/libs/modernizr-2.5.2-respond-1.1.0.min.js"></script>
 
-<?php if($has_recorded == false): ?>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+
+<?php if($has_recorded == false): ?>
   <script type="text/javascript" src="js/wami/recorder.js?v2"></script>
 
   <script>
