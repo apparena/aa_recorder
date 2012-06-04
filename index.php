@@ -214,7 +214,7 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/plugins.js?v2"></script>
   <script src="js/script.js?v10"></script>
-  <script src="js/audiojs/audio.min.js?v10"> </script> 
+  <script src="js/audiojs/audio.min.js?v11"> </script> 
 	<script src="js/libs/aa.js?v7"></script>
 
 
